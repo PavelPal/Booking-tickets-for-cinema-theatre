@@ -1,7 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using CinemaCounter;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(CinemaCounter.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace CinemaCounter
 {
     public partial class Startup

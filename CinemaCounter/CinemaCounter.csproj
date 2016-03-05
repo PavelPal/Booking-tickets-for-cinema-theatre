@@ -177,8 +177,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CinemaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +190,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Cinema\CinemaService.cs" />
+    <Compile Include="Models\Cinema\CinemaViewModel.cs" />
+    <Compile Include="Models\Cinema\ICinemaService.cs" />
     <Compile Include="Models\DAO\Actor\ActorDao.cs" />
     <Compile Include="Models\DAO\Cinema\CinemaDao.cs" />
     <Compile Include="Models\DAO\Company\CompanyDao.cs" />
@@ -196,29 +201,41 @@
     <Compile Include="Models\DAO\Cinema\ICinemaDao.cs" />
     <Compile Include="Models\DAO\Company\ICompanyDao.cs" />
     <Compile Include="Models\DAO\Director\IDirectorDao.cs" />
+    <Compile Include="Models\DAO\Genre\GenreDao.cs" />
+    <Compile Include="Models\DAO\Genre\IGenreDao.cs" />
     <Compile Include="Models\DAO\Scene\ISceneDao.cs" />
     <Compile Include="Models\DAO\Ticket\ITicketDao.cs" />
     <Compile Include="Models\DAO\Scene\SceneDao.cs" />
     <Compile Include="Models\DAO\Session\ISessionDao.cs" />
     <Compile Include="Models\DAO\Session\SessionDao.cs" />
     <Compile Include="Models\DAO\Ticket\TicketDao.cs" />
-    <Compile Include="Models\Enities\Actor.cs" />
-    <Compile Include="Models\Enities\Cinema.cs" />
-    <Compile Include="Models\Enities\Company.cs" />
-    <Compile Include="Models\Enities\Director.cs" />
-    <Compile Include="Models\Enities\Genre.cs" />
-    <Compile Include="Models\Enities\Scene.cs" />
-    <Compile Include="Models\Enities\Session.cs" />
-    <Compile Include="Models\Enities\Ticket.cs" />
+    <Compile Include="Models\Entities\Actor.cs" />
+    <Compile Include="Models\Entities\Cinema.cs" />
+    <Compile Include="Models\Entities\Company.cs" />
+    <Compile Include="Models\Entities\Director.cs" />
+    <Compile Include="Models\Entities\Genre.cs" />
+    <Compile Include="Models\Entities\Scene.cs" />
+    <Compile Include="Models\Entities\Session.cs" />
+    <Compile Include="Models\Entities\Ticket.cs" />
+    <Compile Include="Models\Home\HomeService.cs" />
+    <Compile Include="Models\Home\IHomeService.cs" />
+    <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-CinemaCounter-20160302100203.mdf" />
+    <Content Include="App_Data\aspnet-CinemaCounter-20160302100203_log.ldf">
+      <DependentUpon>aspnet-CinemaCounter-20160302100203.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\mui.css" />
     <Content Include="Content\css\mui.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\functions.js" />
@@ -226,6 +243,11 @@
     <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -273,10 +295,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Session\Index.cshtml" />
+    <Content Include="Views\Session\Session.cshtml" />
+    <Content Include="Views\Cinema\Cinema.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
