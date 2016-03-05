@@ -1,33 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace CinemaCounter.Models.DAO.Scene
 {
     public class SceneDao : ISceneDao
     {
-        public void Add()
+        public void Add(Entities.Scene scene)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                context.Scenes.Add(scene);
+                context.SaveChanges();
+            }
         }
 
-        public void Edit()
+        public void Edit(Entities.Scene scene)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                context.Entry(scene).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                var deleteItem = context.Scenes.FirstOrDefault(s => s.Id == id);
+                if (deleteItem == null)
+                    return;
+                context.Scenes.Remove(deleteItem);
+                context.SaveChanges();
+            }
         }
 
-        public Enities.Scene Load(int id)
+        public Entities.Scene Load(int id)
         {
-            throw new NotImplementedException();
+            Entities.Scene scene;
+            using (var context = new ApplicationDbContext())
+            {
+                scene = context.Scenes.FirstOrDefault(s => s.Id == id);
+            }
+            return scene;
         }
 
-        public List<Enities.Scene> Load(int skip, int take)
+        public List<Entities.Scene> Load(int skip, int take)
         {
-            throw new NotImplementedException();
+            List<Entities.Scene> scenes;
+            using (var context = new ApplicationDbContext())
+            {
+                scenes = context.Scenes.OrderByDescending(s => s.DataOfCreated).Skip(skip).Take(take).ToList();
+            }
+            return scenes;
+        }
+
+        public int Count()
+        {
+            int count;
+            using (var context = new ApplicationDbContext())
+            {
+                count = context.Scenes.Count();
+            }
+            return count;
         }
     }
 }

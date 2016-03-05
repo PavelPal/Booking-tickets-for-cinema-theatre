@@ -4,10 +4,11 @@ namespace CinemaCounter.Models.DAO.Ticket
 {
     public interface ITicketDao
     {
-        void Add();
-        void Edit();
-        void Delete();
-        Enities.Ticket Load(int id);
-        List<Enities.Ticket> Load(int skip, int take);
+        void Add(Entities.Ticket ticket);
+        void Edit(Entities.Ticket ticket);
+        void Delete(int id);
+        Entities.Ticket Load(int id);
+        List<Entities.Ticket> Load(int skip, int take);
+        int Count();
     }
 }

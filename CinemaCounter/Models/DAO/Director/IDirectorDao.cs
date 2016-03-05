@@ -4,10 +4,11 @@ namespace CinemaCounter.Models.DAO.Director
 {
     public interface IDirectorDao
     {
-        void Add();
-        void Edit();
-        void Delete();
-        Enities.Director Load(int id);
-        List<Enities.Director> Load(int skip, int take);
+        void Add(Entities.Director director);
+        void Edit(Entities.Director director);
+        void Delete(int id);
+        Entities.Director Load(int id);
+        List<Entities.Director> Load(int skip, int take);
+        int Count();
     }
 }

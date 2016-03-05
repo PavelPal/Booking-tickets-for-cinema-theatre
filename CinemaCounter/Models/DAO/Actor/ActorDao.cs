@@ -1,33 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace CinemaCounter.Models.DAO.Actor
 {
     public class ActorDao : IActorDao
     {
-        public void Add()
+        public void Add(Entities.Actor actor)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                context.Actors.Add(actor);
+                context.SaveChanges();
+            }
         }
 
-        public void Edit()
+        public void Edit(Entities.Actor actor)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                context.Entry(actor).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                var deleteItem = context.Actors.FirstOrDefault(a => a.Id == id);
+                if (deleteItem == null)
+                    return;
+                context.Actors.Remove(deleteItem);
+                context.SaveChanges();
+            }
         }
 
-        public Enities.Actor Load(int id)
+        public Entities.Actor Load(int id)
         {
-            throw new NotImplementedException();
+            Entities.Actor actor;
+            using (var context = new ApplicationDbContext())
+            {
+                actor = context.Actors.FirstOrDefault(a => a.Id == id);
+            }
+            return actor;
         }
 
-        public List<Enities.Actor> Load(int skip, int take)
+        public List<Entities.Actor> Load(int skip, int take)
         {
-            throw new NotImplementedException();
+            List<Entities.Actor> actors;
+            using (var context = new ApplicationDbContext())
+            {
+                actors = context.Actors.OrderBy(g => g.Name).Skip(skip).Take(take).ToList();
+            }
+            return actors;
+        }
+
+        public int Count()
+        {
+            int count;
+            using (var context = new ApplicationDbContext())
+            {
+                count = context.Actors.Count();
+            }
+            return count;
         }
     }
 }

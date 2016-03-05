@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CinemaCounter.Models.Enities
+namespace CinemaCounter.Models.Entities
 {
-    public class Company
+    public class Director
     {
-        public Company()
+        public Director()
         {
             Scenes = new List<Scene>();
         }
@@ -14,9 +14,9 @@ namespace CinemaCounter.Models.Enities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Не корректно введено название")]
+        [Required(ErrorMessage = "Не корректно введено имя")]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 3)]
-        [Display(Name = "Название")]
+        [Display(Name = "Имя")]
         public string Name { get; set; }
 
         public ICollection<Scene> Scenes { get; set; }

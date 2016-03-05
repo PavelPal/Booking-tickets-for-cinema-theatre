@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CinemaCounter.Models.Enities
+namespace CinemaCounter.Models.Entities
 {
     public class Scene
     {

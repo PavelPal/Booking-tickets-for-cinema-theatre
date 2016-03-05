@@ -1,33 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace CinemaCounter.Models.DAO.Company
 {
     public class CompanyDao : ICompanyDao
     {
-        public void Add()
+        public void Add(Entities.Company company)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                context.Companies.Add(company);
+                context.SaveChanges();
+            }
         }
 
-        public void Edit()
+        public void Edit(Entities.Company company)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                context.Entry(company).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new ApplicationDbContext())
+            {
+                var deleteItem = context.Companies.FirstOrDefault(c => c.Id == id);
+                if (deleteItem == null)
+                    return;
+                context.Companies.Remove(deleteItem);
+                context.SaveChanges();
+            }
         }
 
-        public Enities.Company Load(int id)
+        public Entities.Company Load(int id)
         {
-            throw new NotImplementedException();
+            Entities.Company company;
+            using (var context = new ApplicationDbContext())
+            {
+                company = context.Companies.FirstOrDefault(c => c.Id == id);
+            }
+            return company;
         }
 
-        public List<Enities.Company> Load(int skip, int take)
+        public List<Entities.Company> Load(int skip, int take)
         {
-            throw new NotImplementedException();
+            List<Entities.Company> companies;
+            using (var context = new ApplicationDbContext())
+            {
+                companies = context.Companies.OrderBy(c => c.Name).Skip(skip).Take(take).ToList();
+            }
+            return companies;
+        }
+
+        public int Count()
+        {
+            int count;
+            using (var context = new ApplicationDbContext())
+            {
+                count = context.Companies.Count();
+            }
+            return count;
         }
     }
 }
