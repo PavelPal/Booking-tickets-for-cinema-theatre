@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="sidedrawer" class="mui--no-user-select">
+        <div class="navbar-title">
+            <h2 class="mui--appbar-line-height">
+                @Html.ActionLink("Кинотеатры", "Index", "Home")
+            </h2>
+        </div>
+        <div class="mui-divider"></div>
+        <ul>
+            <li>
+                <strong>Главная</strong>
+                <ul>
+                    <li>@Html.ActionLink("Домашняя", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("О проекте", "About", "Home")</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Сеансы</strong>
+                <ul>
+                    <li><a href="#">Все сеансы</a></li>
+                    <li><a href="#">Сегодня</a></li>
+                    <li><a href="#">На этой неделе</a></li>
+                    <li><a href="#">В этом месяце</a></li>
+                </ul>
+            </li>
+            @Html.Partial("_LoginPartial")
+        </ul>
+    </div>
+    <header id="header">
+        <div class="mui-appbar mui--appbar-line-height">
+            <div class="mui-container-fluid">
+                <a id="appbar-sidenav-show" class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer"><i class="fa fa-bars"></i></a>
+                <a id="appbar-sidenav-hide" class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer"><i class="fa fa-bars"></i></a>
+                <span class="mui--text-title mui--visible-xs-inline-block">Кинотеатры</span>
+                <div id="fountainG">
+                    <div id="fountainG_1" class="fountainG"></div>
+                    <div id="fountainG_2" class="fountainG"></div>
+                    <div id="fountainG_3" class="fountainG"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="content-wrapper">
+        <div class="mui-container-fluid">
+            <div class="mui-row">
+                <div class="mui-col-xs-10 mui-col-xs-offset-1">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="mui-container-fluid">
+            <br>
+            Разработчик: <a href="https://vk.com/paul_pal">Павел Павлющик</a>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", false)
+</body>
+</html>

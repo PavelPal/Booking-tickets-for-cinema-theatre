@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNet.Identity
+<li>
+    <strong>Учетная запись</strong>
+    <ul>
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm"}))
+            {
+                @Html.AntiForgeryToken()
+                <li>
+                    @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", null, new {title = "Manage"})
+                </li>
+                <li>
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                </li>
+            }
+        }
+        else
+        {
+            <li>@Html.ActionLink("Регистрация", "Register", "Account", null, new {id = "registerLink"})</li>
+            <li>@Html.ActionLink("Выполнить вход", "Login", "Account", null, new {id = "loginLink"})</li>
+        }
+    </ul>
+</li>
