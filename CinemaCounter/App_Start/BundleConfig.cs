@@ -21,7 +21,8 @@ namespace CinemaCounter
                 "~/Scripts/functions.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/css/mui.css",
+                "~/Content/css/mui.min.css",
+                "~/Content/css/font-awesome.min.css",
                 "~/Content/css/main.css"));
         }
     }
