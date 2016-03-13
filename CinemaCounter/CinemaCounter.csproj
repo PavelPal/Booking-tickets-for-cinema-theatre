@@ -177,6 +177,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CinemaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -184,12 +185,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603030923120_DataMigration.cs" />
-    <Compile Include="Migrations\201603030923120_DataMigration.Designer.cs">
-      <DependentUpon>201603030923120_DataMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201603060501081_DataMigration.cs" />
+    <Compile Include="Migrations\201603060501081_DataMigration.Designer.cs">
+      <DependentUpon>201603060501081_DataMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin\AdminService.cs" />
+    <Compile Include="Models\Admin\IAdminService.cs" />
+    <Compile Include="Models\Admin\IndexViewModel.cs" />
+    <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\Cinema\CinemaService.cs" />
     <Compile Include="Models\Cinema\CinemaViewModel.cs" />
     <Compile Include="Models\Cinema\ICinemaService.cs" />
@@ -204,11 +209,15 @@
     <Compile Include="Models\DAO\Genre\GenreDao.cs" />
     <Compile Include="Models\DAO\Genre\IGenreDao.cs" />
     <Compile Include="Models\DAO\Scene\ISceneDao.cs" />
+    <Compile Include="Models\DAO\Task\ITaskDao.cs" />
+    <Compile Include="Models\DAO\Task\TaskDao.cs" />
     <Compile Include="Models\DAO\Ticket\ITicketDao.cs" />
     <Compile Include="Models\DAO\Scene\SceneDao.cs" />
     <Compile Include="Models\DAO\Session\ISessionDao.cs" />
     <Compile Include="Models\DAO\Session\SessionDao.cs" />
     <Compile Include="Models\DAO\Ticket\TicketDao.cs" />
+    <Compile Include="Models\DAO\User\IUserDao.cs" />
+    <Compile Include="Models\DAO\User\UserDao.cs" />
     <Compile Include="Models\Entities\Actor.cs" />
     <Compile Include="Models\Entities\Cinema.cs" />
     <Compile Include="Models\Entities\Company.cs" />
@@ -216,6 +225,7 @@
     <Compile Include="Models\Entities\Genre.cs" />
     <Compile Include="Models\Entities\Scene.cs" />
     <Compile Include="Models\Entities\Session.cs" />
+    <Compile Include="Models\Entities\Task.cs" />
     <Compile Include="Models\Entities\Ticket.cs" />
     <Compile Include="Models\Home\HomeService.cs" />
     <Compile Include="Models\Home\IHomeService.cs" />
@@ -230,14 +240,36 @@
     <Content Include="App_Data\aspnet-CinemaCounter-20160302100203_log.ldf">
       <DependentUpon>aspnet-CinemaCounter-20160302100203.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\css\admin\bootstrap-table.css" />
+    <Content Include="Content\css\admin\bootstrap-theme.css" />
+    <Content Include="Content\css\admin\bootstrap-theme.min.css" />
+    <Content Include="Content\css\admin\bootstrap.css" />
+    <Content Include="Content\css\admin\bootstrap.min.css" />
+    <Content Include="Content\css\admin\datepicker.css" />
+    <Content Include="Content\css\admin\datepicker3.css" />
+    <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\mui.css" />
     <Content Include="Content\css\mui.min.css" />
+    <Content Include="Content\fonts\admin\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\admin\admin-panel.js" />
+    <Content Include="Scripts\admin\bootstrap-datepicker.js" />
+    <Content Include="Scripts\admin\bootstrap-table.js" />
+    <Content Include="Scripts\admin\bootstrap.js" />
+    <Content Include="Scripts\admin\bootstrap.min.js" />
+    <Content Include="Scripts\admin\chart-data.js" />
+    <Content Include="Scripts\admin\chart.min.js" />
+    <Content Include="Scripts\admin\easypiechart-data.js" />
+    <Content Include="Scripts\admin\easypiechart.js" />
+    <Content Include="Scripts\admin\html5shiv.min.js" />
+    <Content Include="Scripts\admin\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\admin\lumino.glyphs.js" />
+    <Content Include="Scripts\admin\respond.min.js" />
     <Content Include="Scripts\functions.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
@@ -248,6 +280,11 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\css\admin\bootstrap-theme.css.map" />
+    <Content Include="Content\css\admin\bootstrap.css.map" />
+    <Content Include="Content\fonts\admin\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\admin\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\admin\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -298,16 +335,23 @@
     <Content Include="Views\Session\Index.cshtml" />
     <Content Include="Views\Session\Session.cshtml" />
     <Content Include="Views\Cinema\Cinema.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Admin\Cinemas.cshtml" />
+    <Content Include="Views\Admin\Scenes.cshtml" />
+    <Content Include="Views\Admin\Sessions.cshtml" />
+    <Content Include="Views\Admin\Tickets.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_LoginPartialAdmin.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603030923120_DataMigration.resx">
-      <DependentUpon>201603030923120_DataMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603060501081_DataMigration.resx">
+      <DependentUpon>201603060501081_DataMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

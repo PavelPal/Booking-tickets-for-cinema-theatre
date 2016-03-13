@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using CinemaCounter.App_Start;
+using CinemaCounter.Models.Admin;
 using CinemaCounter.Models.Cinema;
 using CinemaCounter.Models.DAO.Actor;
 using CinemaCounter.Models.DAO.Cinema;
@@ -9,7 +10,9 @@ using CinemaCounter.Models.DAO.Director;
 using CinemaCounter.Models.DAO.Genre;
 using CinemaCounter.Models.DAO.Scene;
 using CinemaCounter.Models.DAO.Session;
+using CinemaCounter.Models.DAO.Task;
 using CinemaCounter.Models.DAO.Ticket;
+using CinemaCounter.Models.DAO.User;
 using CinemaCounter.Models.Home;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
@@ -81,6 +84,9 @@ namespace CinemaCounter.App_Start
             kernel.Bind<IGenreDao>().To<GenreDao>();
             kernel.Bind<IHomeService>().To<HomeService>();
             kernel.Bind<ICinemaService>().To<CinemaService>();
+            kernel.Bind<IAdminService>().To<AdminService>();
+            kernel.Bind<IUserDao>().To<UserDao>();
+            kernel.Bind<ITaskDao>().To<TaskDao>();
         }
     }
 }

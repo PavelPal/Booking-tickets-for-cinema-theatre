@@ -62,7 +62,12 @@ namespace CinemaCounter.Models.DAO.Session
             List<Entities.Session> sessions;
             using (var context = new ApplicationDbContext())
             {
-                sessions = context.Sessions.Where(s => s.Id == id).OrderByDescending(s => s.Date).Skip(skip).Take(take).ToList();
+                sessions =
+                    context.Sessions.Where(s => s.Id == id)
+                        .OrderByDescending(s => s.Date)
+                        .Skip(skip)
+                        .Take(take)
+                        .ToList();
             }
             return sessions;
         }

@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CinemaCounter.Models.Enities;
+using CinemaCounter.Models.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Task = CinemaCounter.Models.Entities.Task;
 
 namespace CinemaCounter.Models
 {
@@ -24,13 +25,14 @@ namespace CinemaCounter.Models
         }
 
         public DbSet<Actor> Actors { get; set; }
-        public DbSet<Cinema> Cinemas { get; set; }
+        public DbSet<Entities.Cinema> Cinemas { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Director> Directors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Scene> Scenes { get; set; }
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
         public static ApplicationDbContext Create()
         {
