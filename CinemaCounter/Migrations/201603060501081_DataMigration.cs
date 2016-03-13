@@ -67,8 +67,12 @@ namespace CinemaCounter.Migrations
                 {
                     Id = c.Int(false, true),
                     Name = c.String(false, 100),
-                    Address = c.String(false, 100),
-                    WebSite = c.String(false, 100)
+                    Town = c.String(false, 100),
+                    Street = c.String(false, 100),
+                    Building = c.String(false, 10),
+                    Station = c.String(),
+                    WebSite = c.String(false, 100),
+                    Phone = c.String(false)
                 })
                 .PrimaryKey(t => t.Id);
 
@@ -122,6 +126,18 @@ namespace CinemaCounter.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+
+            CreateTable(
+                "dbo.Tasks",
+                c => new
+                {
+                    Id = c.Int(false, true),
+                    Body = c.String(false, 100),
+                    IsDone = c.Boolean(false),
+                    IsImportant = c.Boolean(false),
+                    Goal = c.String()
+                })
+                .PrimaryKey(t => t.Id);
 
             CreateTable(
                 "dbo.AspNetUsers",
@@ -230,6 +246,7 @@ namespace CinemaCounter.Migrations
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Tasks");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Tickets");

@@ -1,0 +1,86 @@
+﻿@model List<CinemaCounter.Models.Entities.Cinema>
+@{
+    ViewBag.Title = "кинотеатры";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mui--text-display1 mui--text-dark-secondary page-title">Изменение данных: @ViewBag.Title</div>
+<div class="mui-row">
+    <div id="cinemas-block" class="mui-col-md-12 item-blocks">
+        @foreach (var item in Model)
+        {
+            <div class="item-block">
+                <div class="mui-panel">
+                    <div class="mui--text-headline">@item.Name</div>
+                    <div class="panel-block">
+                        <div class="mui--text-body2">
+                            <p>Адрес: @item.Town, @item.Street @item.Building</p>
+                            @if (item.Station != null)
+                            {
+                                <p>Станция метро: @item.Station</p>
+                            }
+                            <p>Номер телефона: @item.Phone</p>
+                            <a class="mui-btn mui-btn--flat" href="@item.WebSite" target="_blank">Ссылка на сайт</a><br/>
+                        </div>
+                    </div>
+                    @Html.ActionLink("Подробнее", "Cinema", "Cinema", new {id = item.Id}, new {@class = "mui-btn mui-btn--flat mui-btn--primary"})
+                </div>
+            </div>
+        }
+    </div>
+    <div id="cinemas-load-box" class="mui-col-md-12">
+        <div class="center-block">
+            <a class="mui-btn mui-btn--raised mui-btn--primary" id="load-more-cinemas-for-admin-btn">Показать больше</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var skip = 9,
+            inProgrss = false;
+        $("#load-more-cinemas-for-admin-btn").click(function() {
+            $.ajax({
+                url: "/Admin/LoadMoreCinemas",
+                method: "GET",
+                data: {
+                    'skip': skip
+                },
+                beforeSend: function() {
+                    inProgrss = true;
+                    $("#fountainG").css({
+                        '-ms-opacity': "1",
+                        'opacity': "1"
+                    });
+                },
+                complete: function() {
+                    $("#fountainG").css({
+                        '-ms-opacity': "0",
+                        'opacity': "0"
+                    });
+                }
+            }).done(function(data) {
+                if (data.length > 0) {
+                    $("#cinemas-load-box").css("display", "block");
+                    $.each(data, function(index, data) {
+                        $("#cinemas-block").append("<div class=\"item-block\">" +
+                            "<div class=\"mui-panel\">" +
+                            "<div class=\"mui--text-headline\">" + data.Name + "</div>" +
+                            "<div class=\"panel-block\">" +
+                            "<div class=\"mui--text-body2\">Адрес: " + data.Town + ", " + data.Street + " " + data.Building + "<br />" +
+                            "<a class=\"mui-btn mui-btn--flat\" href=\"" + data.WebSite + " target=\"_blank\">" +
+                            "сайт кинотеатра</a></div></div>" +
+                            "<a href=\"Cinema/Cinema/" + data.Id + "\" class=\"mui-btn mui-btn--flat mui-btn--primary\">Подробнее</a>" + "</div></div>");
+                    });
+                    inProgrss = false;
+                    skip += 9;
+                } else {
+                    $("#cinemas-load-box").css("display", "none");
+                }
+                if (data.length < 9) {
+                    $("#cinemas-load-box").css("display", "none");
+                }
+            });
+        });
+    });
+</script>

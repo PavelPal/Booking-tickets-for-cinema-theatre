@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,6 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    <link rel="stylesheet" href="~/Content/css/admin.css">
 </head>
 <body>
     <div id="sidedrawer" class="mui--no-user-select">
@@ -35,7 +37,17 @@
                     <li><a href="#">В этом месяце</a></li>
                 </ul>
             </li>
-            @Html.Partial("_LoginPartial")
+            <li>
+                <strong>Информация о сайте</strong>
+                <ul>
+                    <li><a href="#">Статистика</a></li>
+                    <li><a href="#">Расписание сеансов</a></li>
+                    <li><a href="#">Кинотеатры</a></li>
+                    <li><a href="#">Актеры</a></li>
+                    <li><a href="#">Другие данные</a></li>
+                </ul>
+            </li>
+            @Html.Partial("_LoginPartialAdmin")
         </ul>
     </div>
     <header id="header">

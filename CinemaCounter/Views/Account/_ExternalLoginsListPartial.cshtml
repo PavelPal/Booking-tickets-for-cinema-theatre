@@ -1,0 +1,21 @@
+﻿@using Microsoft.Owin.Security
+@model CinemaCounter.Models.ExternalLoginListViewModel
+
+<div class="mui--text-title">Используйте для входа другую службу</div>
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+    }
+    else
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new {Model.ReturnUrl}))
+        {
+            @Html.AntiForgeryToken()
+            foreach (var p in loginProviders)
+            {
+                <button type="submit" class="mui-btn mui-btn--raised" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Войти с помощью учетной записи @p.Caption">@p.AuthenticationType</button>
+            }
+        }
+    }
+}

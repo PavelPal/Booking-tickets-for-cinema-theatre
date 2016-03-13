@@ -14,6 +14,10 @@
                     <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
                 </li>
             }
+            if (User.IsInRole("admin"))
+            {
+                <li>@Html.ActionLink("Панель администратора", "AdminPanel", "Admin")</li>
+            }
         }
         else
         {

@@ -1,0 +1,315 @@
+﻿@model CinemaCounter.Models.Admin.IndexViewModel
+@{
+    ViewBag.Title = "Панель администратора";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/Scripts/admin/chart.min.js"></script>
+<script src="~/Scripts/admin/chart-data.js"></script>
+<script src="~/Scripts/admin/easypiechart.js"></script>
+<script src="~/Scripts/admin/easypiechart-data.js"></script>
+
+<div class="mui--text-display1 mui--text-dark-secondary page-title">Статистика</div>
+
+<div class="mui-row">
+    <div class="mui-col-xs-12 mui-col-sm-6">
+        <div class="mui-panel panel-blue panel-widget ">
+            <div class="mui-row no-padding">
+                <div class="mui-col-xs-4 mui-col-sm-5 mui-col-lg-3 widget-left">
+                    <i class="fa fa-film fa-3x"></i>
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-7 mui-col-lg-9 widget-right">
+                    <div class="large">@Html.DisplayFor(m => m.CinemasCount)</div>
+                    <div class="text-muted">Кинотеатров</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-xs-12 mui-col-sm-6">
+        <div class="mui-panel panel-orange panel-widget">
+            <div class="mui-row no-padding">
+                <div class="mui-col-xs-4 mui-col-sm-5 mui-col-lg-3 widget-left">
+                    <i class="fa fa-file-movie-o fa-3x"></i>
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-7 mui-col-lg-9 widget-right">
+                    <div class="large">@Html.DisplayFor(m => m.SessionsCount)</div>
+                    <div class="text-muted">Сеансов</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-xs-12 mui-col-sm-6">
+        <div class="mui-panel panel-teal panel-widget">
+            <div class="mui-row no-padding">
+                <div class="mui-col-xs-4 mui-col-sm-5 mui-col-lg-3 widget-left">
+                    <i class="fa fa-users fa-3x"></i>
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-7 mui-col-lg-9 widget-right">
+                    <div class="large">@Html.DisplayFor(m => m.UsersCount)</div>
+                    <div class="text-muted">Пользователей</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-xs-12 mui-col-sm-6">
+        <div class="mui-panel panel-red panel-widget">
+            <div class="mui-row no-padding">
+                <div class="mui-col-xs-4 mui-col-sm-5 mui-col-lg-3 widget-left">
+                    <i class="fa fa-ticket fa-3x"></i>
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-7 mui-col-lg-9 widget-right">
+                    <div class="large">@Html.DisplayFor(m => m.ThicketsCount)</div>
+                    <div class="text-muted">Заказов</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mui-row">
+    <div class="mui-col-lg-12">
+        <div class="mui-panel panel-default">
+            <div class="panel-heading">Site Traffic Overview</div>
+            <div class="panel-body">
+                <div class="canvas-wrapper">
+                    <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mui-row">
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
+        <div class="mui-panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>New Orders</h4>
+                <div class="easypiechart" id="easypiechart-blue" data-percent="92">
+                    <span class="percent">92%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
+        <div class="mui-panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>Comments</h4>
+                <div class="easypiechart" id="easypiechart-orange" data-percent="65">
+                    <span class="percent">65%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
+        <div class="mui-panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>New Users</h4>
+                <div class="easypiechart" id="easypiechart-teal" data-percent="56">
+                    <span class="percent">56%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
+        <div class="mui-panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>Visitors</h4>
+                <div class="easypiechart" id="easypiechart-red" data-percent="27">
+                    <span class="percent">27%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mui-row">
+    <div class="mui-col-md-12 mui-col-lg-4 panel-col">
+        <div class="mui-panel panel-success to-do-list-panel">
+            <div class="panel-heading dark-overlay">
+                <i class="fa fa-paperclip"></i>Список на добавление
+            </div>
+            <div class="panel-body">
+                <ul class="todo-list" id="add-task">
+                    @if (Model.Tasks.Count(t => t.Goal.Equals("add")) == 0)
+                    {
+                        <p class="todo-list-info">
+                            <i class="fa fa-info-circle color-blue"></i> Нет заданий для добавления
+                        </p>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Tasks.Where(t => t.Goal.Equals("add")))
+                        {
+                            <li class="todo-list-item" id="todo-list-item-@item.Id">
+                                <div class="checkbox">
+                                    @if (item.IsDone)
+                                    {
+                                        <input type="checkbox" id="checkbox-@item.Id" checked/>
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="checkbox-@item.Id"/>
+                                    }
+                                    <label for="checkbox-@item.Id">@item.Body</label>
+                                </div>
+                                <div class="pull-right action-buttons">
+                                    <a class="edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a class="flag">
+                                        @if (item.IsImportant)
+                                        {
+                                            <i class="fa fa-flag color-red"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-flag"></i>
+                                        }
+                                    </a>
+                                    <a class="trash">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="mui-form--inline add-form">
+                    <div class="mui-textfield">
+                        <input id="add-to-add-input" type="text" placeholder="Добавить в список"/>
+                    </div>
+                    <button class="mui-btn mui-btn--small" id="add-to-add">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mui-col-md-12 mui-col-lg-4 panel-col">
+        <div class="mui-panel panel-primary to-do-list-panel">
+            <div class="panel-heading dark-overlay">
+                <i class="fa fa-paperclip"></i>Список на редактирование
+            </div>
+            <div class="panel-body">
+                <ul class="todo-list" id="edit-task">
+                    @if (Model.Tasks.Count(t => t.Goal.Equals("edit")) == 0)
+                    {
+                        <p class="todo-list-info">
+                            <i class="fa fa-info-circle color-blue"></i> Нет заданий для редактирования
+                        </p>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Tasks.Where(t => t.Goal.Equals("edit")))
+                        {
+                            <li class="todo-list-item" id="todo-list-item-@item.Id">
+                                <div class="checkbox">
+                                    @if (item.IsDone)
+                                    {
+                                        <input type="checkbox" id="checkbox-@item.Id" checked/>
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="checkbox-@item.Id"/>
+                                    }
+                                    <label for="checkbox-@item.Id">@item.Body</label>
+                                </div>
+                                <div class="pull-right action-buttons">
+                                    <a class="edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a class="flag">
+                                        @if (item.IsImportant)
+                                        {
+                                            <i class="fa fa-flag color-red"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-flag"></i>
+                                        }
+                                    </a>
+                                    <a class="trash">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="mui-form--inline add-form">
+                    <div class="mui-textfield">
+                        <input id="add-to-edit-input" type="text" placeholder="Добавить в список"/>
+                    </div>
+                    <button class="mui-btn mui-btn--small" id="add-to-edit">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mui-col-md-12 mui-col-lg-4 panel-col">
+        <div class="mui-panel panel-danger to-do-list-panel">
+            <div class="panel-heading dark-overlay">
+                <i class="fa fa-paperclip"></i>Список на удаление
+            </div>
+            <div class="panel-body">
+                <ul class="todo-list" id="remove-task">
+                    @if (Model.Tasks.Count(t => t.Goal.Equals("remove")) == 0)
+                    {
+                        <p class="todo-list-info">
+                            <i class="fa fa-info-circle color-blue"></i> Нет заданий для удаления
+                        </p>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Tasks.Where(t => t.Goal.Equals("remove")))
+                        {
+                            <li class="todo-list-item" id="todo-list-item-@item.Id">
+                                <div class="checkbox">
+                                    @if (item.IsDone)
+                                    {
+                                        <input type="checkbox" id="checkbox-@item.Id" checked/>
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="checkbox-@item.Id"/>
+                                    }
+                                    <label for="checkbox-@item.Id">@item.Body</label>
+                                </div>
+                                <div class="pull-right action-buttons">
+                                    <a class="edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a class="flag">
+                                        @if (item.IsImportant)
+                                        {
+                                            <i class="fa fa-flag color-red"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-flag"></i>
+                                        }
+                                    </a>
+                                    <a class="trash">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="mui-form--inline add-form">
+                    <div class="mui-textfield">
+                        <input id="add-to-remove-input" type="text" placeholder="Добавить в список"/>
+                    </div>
+                    <button class="mui-btn mui-btn--small" id="add-to-remove">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/admin/admin-panel.js"></script>

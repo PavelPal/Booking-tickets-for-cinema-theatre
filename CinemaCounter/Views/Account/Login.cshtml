@@ -1,0 +1,52 @@
+﻿@using CinemaCounter.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Выполнить вход";
+}
+
+<div class="row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+
+            @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+                <legend>Используйте локальную учетную запись для входа</legend>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="mui-textfield mui-textfield--float-label">
+                    @Html.TextBoxFor(m => m.Email, new {required = ""})
+                    @Html.LabelFor(m => m.Email)
+                </div>
+                <div class="mui-textfield mui-textfield--float-label">
+                    @Html.PasswordFor(m => m.Password, new {required = ""})
+                    @Html.LabelFor(m => m.Password)
+                </div>
+                <div class="mui-checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+                <button type="submit" class="mui-btn mui-btn--raised">Войти</button>
+            }
+            <p>
+                @Html.ActionLink("Регистрация нового пользователя", "Register")
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui-panel">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel {ReturnUrl = ViewBag.ReturnUrl})
+        </div>
+    </div>
+</div>
+
+@* Включите, когда будет включено подтверждение учетной записи для функции сброса пароля
+    <p>
+    @Html.ActionLink("Забыли пароль?", "ForgotPassword")
+    </p>
+*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

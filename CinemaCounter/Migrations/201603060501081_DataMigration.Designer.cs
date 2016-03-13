@@ -13,7 +13,7 @@ namespace CinemaCounter.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201603030923120_DataMigration"; }
+            get { return "201603060501081_DataMigration"; }
         }
         
         string IMigrationMetadata.Source
