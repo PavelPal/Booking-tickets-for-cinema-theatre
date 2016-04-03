@@ -4,18 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
-<div class="mui-panel">
-    <div class="mui--text-headline">Кинотеатр @Model.Cinema.Name</div>
-    <div class="panel-block">
-        <div class="mui--text-body2">
-            <p>Адрес: @Model.Cinema.Town, @Model.Cinema.Street @Model.Cinema.Building</p>
-            @if (Model.Cinema.Station != null)
-            {
-                <p>Станция метро: @Model.Cinema.Station</p>
-            }
-            <p>Номер телефона: @Model.Cinema.Phone</p>
-            <a class="mui-btn mui-btn--flat" href="@Model.Cinema.WebSite" target="_blank">Ссылка на сайт</a><br/>
+<div class="mui-row">
+    <div class="mui-col-md-5">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Кинотеатр @Model.Cinema.Name</div>
+            <div class="panel-block">
+                <img src="@Model.Cinema.ImagePath" alt=""/>
+                <div class="mui--text-body2">
+                    <p>Адрес: @Model.Cinema.Town, @Model.Cinema.Street @Model.Cinema.Building</p>
+                    @if (Model.Cinema.Station != null)
+                    {
+                        <p>Станция метро: @Model.Cinema.Station</p>
+                    }
+                    <p>Номер телефона: @Model.Cinema.Phone</p>
+                    <a class="mui-btn mui-btn--flat" href="@Model.Cinema.WebSite" target="_blank">Ссылка на сайт</a><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-md-7">
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
         </div>
     </div>
 </div>
@@ -48,11 +70,11 @@
                         <div class="mui--text-headline">@item.Scene.Name</div>
                         <div class="panel-block">
                             <div class="mui--text-body2">
-                                Время проведения: @item.Date<br/>
-                                Кинотеатр: @item.Cinema.Name<br/>
+                                Время проведения: @item.Date<br />
+                                Кинотеатр: @item.Cinema.Name<br />
                             </div>
                         </div>
-                        @Html.ActionLink("Подробнее", "Session", "Session", new {id = item.Id}, new {@class = "mui-btn mui-btn--flat mui-btn--primary"})
+                        @Html.ActionLink("Подробнее", "Session", "Session", new { id = item.Id }, new { @class = "mui-btn mui-btn--flat mui-btn--primary" })
                     </div>
                 </div>
             }

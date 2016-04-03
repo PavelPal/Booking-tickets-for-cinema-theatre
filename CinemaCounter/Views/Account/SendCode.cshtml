@@ -11,7 +11,7 @@
     @Html.Hidden("rememberMe", @Model.RememberMe)
     <h4>Отправить проверочный код</h4>
     <hr/>
-    <div class="row">
+    <div class="mui-row">
         <div class="col-md-8">
             Выбор поставщика двухфакторной проверки подлинности:
             @Html.DropDownListFor(model => model.SelectedProvider, Model.Providers)

@@ -30,6 +30,7 @@
                     <div class="mui-panel">
                         <div class="mui--text-headline">@item.Name</div>
                         <div class="panel-block">
+                            <img src="@item.ImagePath" alt=""/>
                             <div class="mui--text-body2">
                                 <p>Адрес: @item.Town, @item.Street @item.Building</p>
                                 @if (item.Station != null)
@@ -130,7 +131,8 @@
                             "<div class=\"mui-panel\">" +
                             "<div class=\"mui--text-headline\">" + data.Name + "</div>" +
                             "<div class=\"panel-block\">" +
-                            "<div class=\"mui--text-body2\">Адрес: " + data.Address + "<br />" +
+                            "<img src=\"" + data.ImagePath + "\" alt=\"\"/>" +
+                            "<div class=\"mui--text-body2\">Адрес: " + data.Town + ", " + data.Street + " " + data.Building + "<br />" +
                             "<a class=\"mui-btn mui-btn--flat\" href=\"" + data.WebSite + " target=\"_blank\">" +
                             "сайт кинотеатра</a></div></div>" +
                             "<a href=\"Cinema/Cinema/" + data.Id + "\" class=\"mui-btn mui-btn--flat mui-btn--primary\">Подробнее</a>" + "</div></div>");
@@ -145,13 +147,13 @@
                 }
             });
         });
-        $("#load-more-cinemas-btn").click(function() {
+        $("#load-more-sessions-btn").click(function () {
             $.ajax({
                 url: "/Home/LoadMoreSessions",
                 method: "GET",
                 data: { 'skip': skipSessions },
                 beforeSend: function() {
-                    inCinemaProgrss = true;
+                    inSessionProgrss = true;
                     $("#fountainG").css({
                         '-ms-opacity': "1",
                         'opacity': "1"

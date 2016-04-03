@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Complete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mui-row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+            <p>Скоро с Вами свяжется администратор для подтверждения. @Html.ActionLink("На главную страницу", "Index", "Home", null, new {id = ""})</p>
+        </div>
+    </div>
+</div>

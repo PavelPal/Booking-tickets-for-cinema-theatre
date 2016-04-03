@@ -6,71 +6,100 @@
 
 <div class="mui--text-display1 mui--text-dark-secondary page-title">Изменение данных: @ViewBag.Title</div>
 <div class="mui-row">
-    <div id="cinemas-block" class="mui-col-md-12 item-blocks">
-        @foreach (var item in Model)
-        {
-            <div class="item-block">
-                <div class="mui-panel">
-                    <div class="mui--text-headline">@item.Name</div>
-                    <div class="panel-block">
-                        <div class="mui--text-body2">
-                            <p>Адрес: @item.Town, @item.Street @item.Building</p>
-                            @if (item.Station != null)
-                            {
-                                <p>Станция метро: @item.Station</p>
-                            }
-                            <p>Номер телефона: @item.Phone</p>
-                            <a class="mui-btn mui-btn--flat" href="@item.WebSite" target="_blank">Ссылка на сайт</a><br/>
-                        </div>
+    @if (Model.Count == 0)
+    {
+        <div class="mui-col-md-12">
+            <div class="mui-panel">
+                <div class="mui--text-headline">Пусто</div>
+                <div class="panel-block">
+                    <div class="mui--text-body1">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x text-info"></i>
+                            <i class="fa fa-info fa-stack-1x white-text"></i>
+                        </span> На данный момент кинотеатры отсутствуют.
                     </div>
-                    @Html.ActionLink("Подробнее", "Cinema", "Cinema", new {id = item.Id}, new {@class = "mui-btn mui-btn--flat mui-btn--primary"})
                 </div>
             </div>
-        }
-    </div>
-    <div id="cinemas-load-box" class="mui-col-md-12">
-        <div class="center-block">
-            <a class="mui-btn mui-btn--raised mui-btn--primary" id="load-more-cinemas-for-admin-btn">Показать больше</a>
         </div>
-    </div>
+    }
+    else
+    {
+        <div id="cinemas-block" class="mui-col-md-12 item-blocks">
+            @foreach (var item in Model)
+            {
+                <div class="item-block">
+                    <div class="mui-panel">
+                        <div class="mui--text-headline">@item.Name</div>
+                        <div class="panel-block">
+                            <img src="@item.ImagePath" alt="" />
+                            <div class="mui--text-body2">
+                                <p>Адрес: @item.Town, @item.Street @item.Building</p>
+                                @if (item.Station != null)
+                                {
+                                    <p>Станция метро: @item.Station</p>
+                                }
+                                <p>Номер телефона: @item.Phone</p>
+                                <a href="@item.WebSite" target="_blank">Ссылка на сайт</a><br />
+                            </div>
+                        </div>
+                        @Html.ActionLink("Подробнее", "Cinema", "Cinema", new { id = item.Id }, new {})
+                        @Html.ActionLink("Удалить", "DeleteCinema", "Admin", new { id = item.Id }, new {})
+                        @Html.ActionLink("Редактировать", "EditCinema", "Admin", new { id = item.Id }, new { })
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="cinemas-load-box" class="mui-col-md-12">
+            <div class="center-block">
+                <a class="mui-btn mui-btn--raised mui-btn--primary" id="load-more-cinemas-btn">Показать больше</a>
+            </div>
+        </div>
+    }
 </div>
 
-<script>
-    $(document).ready(function() {
-        var skip = 9,
+<div class="kc_fab_wrapper kc_fab_wrapper-cinema"></div>
+
+<script src="~/Scripts/admin/sessions-admin.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var skip = 3,
             inProgrss = false;
-        $("#load-more-cinemas-for-admin-btn").click(function() {
+        $("#load-more-cinemas-btn").click(function () {
             $.ajax({
                 url: "/Admin/LoadMoreCinemas",
                 method: "GET",
                 data: {
                     'skip': skip
                 },
-                beforeSend: function() {
+                beforeSend: function () {
                     inProgrss = true;
                     $("#fountainG").css({
                         '-ms-opacity': "1",
                         'opacity': "1"
                     });
                 },
-                complete: function() {
+                complete: function () {
                     $("#fountainG").css({
                         '-ms-opacity': "0",
                         'opacity': "0"
                     });
                 }
-            }).done(function(data) {
+            }).done(function (data) {
                 if (data.length > 0) {
                     $("#cinemas-load-box").css("display", "block");
-                    $.each(data, function(index, data) {
+                    $.each(data, function (index, data) {
                         $("#cinemas-block").append("<div class=\"item-block\">" +
                             "<div class=\"mui-panel\">" +
                             "<div class=\"mui--text-headline\">" + data.Name + "</div>" +
                             "<div class=\"panel-block\">" +
+                            "<img src=\"" + data.ImagePath + "\" alt=\"\"/>" +
                             "<div class=\"mui--text-body2\">Адрес: " + data.Town + ", " + data.Street + " " + data.Building + "<br />" +
-                            "<a class=\"mui-btn mui-btn--flat\" href=\"" + data.WebSite + " target=\"_blank\">" +
+                            "<a href=\"" + data.WebSite + " target=\"_blank\">" +
                             "сайт кинотеатра</a></div></div>" +
-                            "<a href=\"Cinema/Cinema/" + data.Id + "\" class=\"mui-btn mui-btn--flat mui-btn--primary\">Подробнее</a>" + "</div></div>");
+                            "<a href=\"Cinema/Cinema/" + data.Id + "\">Подробнее</a>" +
+                            "<a href=\"Admin/DeleteCinema/" + data.Id + "\">Удалить</a>" +
+                            "<a href=\"Admin/EditCinema/" + data.Id + "\">Редактировать</a>" +
+                            "</div></div>");
                     });
                     inProgrss = false;
                     skip += 9;
@@ -82,5 +111,20 @@
                 }
             });
         });
+
+        var links = [
+            {
+                "bgcolor": "#0d47a1",
+                "icon": "+"
+            },
+            {
+                "url": "/Admin/AddCinema",
+                "bgcolor": "#303f9f",
+                "color": "#fffff",
+                "icon": "<i class='fa fa-film'></i>",
+                "title": "фильм"
+            }
+        ];
+        $('.kc_fab_wrapper').kc_fab(links);
     });
 </script>

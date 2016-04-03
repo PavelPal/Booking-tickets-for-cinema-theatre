@@ -1,6 +1,36 @@
-﻿@{
-    ViewBag.Title = "Tickets";
+﻿@model List<CinemaCounter.Models.Entities.Ticket>
+
+@{
+    ViewBag.Title = "Брони";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tickets</h2>
+<div class="mui-row">
+    <div class="mui-col-xs-12">
+        <div class="mui-panel">
+            <div class="mui-row no-padding">
+                <table class="mui-table mui-table--bordered">
+                    <thead>
+                        <tr>
+                            <th>Заказчик</th>
+                            <th>Цена</th>
+                            <th>Фильм</th>
+                            <th>Кинотеатр</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CustomerName</td>
+                                <td>@item.Cost</td>
+                                <td>@item.Session.Scene.Name</td>
+                                <td>@item.Session.Cinema.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

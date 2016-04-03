@@ -23,16 +23,64 @@ namespace CinemaCounter.Migrations
                     Name = c.String(false, 100),
                     Description = c.String(false, 100),
                     DataOfCreated = c.DateTime(false),
-                    Duration = c.Double(false),
+                    Duration = c.Int(false),
                     Mark = c.Double(false),
-                    CompanyId = c.Int(false),
-                    DirectorId = c.Int(false)
+                    ImagePath = c.String(),
+                    Company_Id = c.Int(),
+                    Director_Id = c.Int()
                 })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Companies", t => t.CompanyId, true)
-                .ForeignKey("dbo.Directors", t => t.DirectorId, true)
-                .Index(t => t.CompanyId)
-                .Index(t => t.DirectorId);
+                .ForeignKey("dbo.Companies", t => t.Company_Id)
+                .ForeignKey("dbo.Directors", t => t.Director_Id)
+                .Index(t => t.Company_Id)
+                .Index(t => t.Director_Id);
+
+            CreateTable(
+                "dbo.Cinemas",
+                c => new
+                {
+                    Id = c.Int(false, true),
+                    Name = c.String(false, 100),
+                    Town = c.String(false, 100),
+                    Street = c.String(false, 100),
+                    Building = c.String(false, 10),
+                    Station = c.String(),
+                    WebSite = c.String(false, 100),
+                    Phone = c.String(false),
+                    ImagePath = c.String(),
+                    Scene_Id = c.Int()
+                })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Scenes", t => t.Scene_Id)
+                .Index(t => t.Scene_Id);
+
+            CreateTable(
+                "dbo.Sessions",
+                c => new
+                {
+                    Id = c.Int(false, true),
+                    Date = c.DateTime(false),
+                    Cinema_Id = c.Int(),
+                    Scene_Id = c.Int()
+                })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Cinemas", t => t.Cinema_Id)
+                .ForeignKey("dbo.Scenes", t => t.Scene_Id)
+                .Index(t => t.Cinema_Id)
+                .Index(t => t.Scene_Id);
+
+            CreateTable(
+                "dbo.Tickets",
+                c => new
+                {
+                    Id = c.Int(false, true),
+                    CustomerName = c.String(false, 100),
+                    Cost = c.Decimal(false, 18, 2),
+                    Session_Id = c.Int()
+                })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sessions", t => t.Session_Id)
+                .Index(t => t.Session_Id);
 
             CreateTable(
                 "dbo.Companies",
@@ -62,47 +110,16 @@ namespace CinemaCounter.Migrations
                 .PrimaryKey(t => t.Id);
 
             CreateTable(
-                "dbo.Cinemas",
+                "dbo.Messages",
                 c => new
                 {
                     Id = c.Int(false, true),
-                    Name = c.String(false, 100),
-                    Town = c.String(false, 100),
-                    Street = c.String(false, 100),
-                    Building = c.String(false, 10),
-                    Station = c.String(),
-                    WebSite = c.String(false, 100),
-                    Phone = c.String(false)
+                    Title = c.String(false, 30),
+                    Sender = c.String(false, 30),
+                    Body = c.String(false, 100),
+                    Date = c.DateTime(false)
                 })
                 .PrimaryKey(t => t.Id);
-
-            CreateTable(
-                "dbo.Sessions",
-                c => new
-                {
-                    Id = c.Int(false, true),
-                    Date = c.DateTime(false),
-                    SceneId = c.Int(false),
-                    CinemaId = c.Int(false)
-                })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Cinemas", t => t.CinemaId, true)
-                .ForeignKey("dbo.Scenes", t => t.SceneId, true)
-                .Index(t => t.SceneId)
-                .Index(t => t.CinemaId);
-
-            CreateTable(
-                "dbo.Tickets",
-                c => new
-                {
-                    Id = c.Int(false, true),
-                    CustomerName = c.String(false, 100),
-                    Cost = c.Decimal(false, 18, 2),
-                    SessionId = c.Int(false)
-                })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Sessions", t => t.SessionId, true)
-                .Index(t => t.SessionId);
 
             CreateTable(
                 "dbo.AspNetRoles",
@@ -217,13 +234,14 @@ namespace CinemaCounter.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Tickets", "SessionId", "dbo.Sessions");
-            DropForeignKey("dbo.Sessions", "SceneId", "dbo.Scenes");
-            DropForeignKey("dbo.Sessions", "CinemaId", "dbo.Cinemas");
             DropForeignKey("dbo.GenreScenes", "Scene_Id", "dbo.Scenes");
             DropForeignKey("dbo.GenreScenes", "Genre_Id", "dbo.Genres");
-            DropForeignKey("dbo.Scenes", "DirectorId", "dbo.Directors");
-            DropForeignKey("dbo.Scenes", "CompanyId", "dbo.Companies");
+            DropForeignKey("dbo.Scenes", "Director_Id", "dbo.Directors");
+            DropForeignKey("dbo.Scenes", "Company_Id", "dbo.Companies");
+            DropForeignKey("dbo.Cinemas", "Scene_Id", "dbo.Scenes");
+            DropForeignKey("dbo.Tickets", "Session_Id", "dbo.Sessions");
+            DropForeignKey("dbo.Sessions", "Scene_Id", "dbo.Scenes");
+            DropForeignKey("dbo.Sessions", "Cinema_Id", "dbo.Cinemas");
             DropForeignKey("dbo.SceneActors", "Actor_Id", "dbo.Actors");
             DropForeignKey("dbo.SceneActors", "Scene_Id", "dbo.Scenes");
             DropIndex("dbo.GenreScenes", new[] {"Scene_Id"});
@@ -236,11 +254,12 @@ namespace CinemaCounter.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] {"RoleId"});
             DropIndex("dbo.AspNetUserRoles", new[] {"UserId"});
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Tickets", new[] {"SessionId"});
-            DropIndex("dbo.Sessions", new[] {"CinemaId"});
-            DropIndex("dbo.Sessions", new[] {"SceneId"});
-            DropIndex("dbo.Scenes", new[] {"DirectorId"});
-            DropIndex("dbo.Scenes", new[] {"CompanyId"});
+            DropIndex("dbo.Tickets", new[] {"Session_Id"});
+            DropIndex("dbo.Sessions", new[] {"Scene_Id"});
+            DropIndex("dbo.Sessions", new[] {"Cinema_Id"});
+            DropIndex("dbo.Cinemas", new[] {"Scene_Id"});
+            DropIndex("dbo.Scenes", new[] {"Director_Id"});
+            DropIndex("dbo.Scenes", new[] {"Company_Id"});
             DropTable("dbo.GenreScenes");
             DropTable("dbo.SceneActors");
             DropTable("dbo.AspNetUserLogins");
@@ -249,12 +268,13 @@ namespace CinemaCounter.Migrations
             DropTable("dbo.Tasks");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Tickets");
-            DropTable("dbo.Sessions");
-            DropTable("dbo.Cinemas");
+            DropTable("dbo.Messages");
             DropTable("dbo.Genres");
             DropTable("dbo.Directors");
             DropTable("dbo.Companies");
+            DropTable("dbo.Tickets");
+            DropTable("dbo.Sessions");
+            DropTable("dbo.Cinemas");
             DropTable("dbo.Scenes");
             DropTable("dbo.Actors");
         }

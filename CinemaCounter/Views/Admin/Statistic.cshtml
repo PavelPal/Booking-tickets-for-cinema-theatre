@@ -1,7 +1,7 @@
 ﻿@model CinemaCounter.Models.Admin.IndexViewModel
 @{
-    ViewBag.Title = "Панель администратора";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Статистика";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script src="~/Scripts/admin/chart.min.js"></script>
@@ -69,7 +69,7 @@
 <div class="mui-row">
     <div class="mui-col-lg-12">
         <div class="mui-panel panel-default">
-            <div class="panel-heading">Site Traffic Overview</div>
+            <div class="panel-heading">Статистика посещений</div>
             <div class="panel-body">
                 <div class="canvas-wrapper">
                     <canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
@@ -83,7 +83,7 @@
     <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
         <div class="mui-panel panel-default">
             <div class="panel-body easypiechart-panel">
-                <h4>New Orders</h4>
+                <h4>Новых заказов</h4>
                 <div class="easypiechart" id="easypiechart-blue" data-percent="92">
                     <span class="percent">92%</span>
                 </div>
@@ -93,7 +93,7 @@
     <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
         <div class="mui-panel panel-default">
             <div class="panel-body easypiechart-panel">
-                <h4>Comments</h4>
+                <h4>Новых комментариев</h4>
                 <div class="easypiechart" id="easypiechart-orange" data-percent="65">
                     <span class="percent">65%</span>
                 </div>
@@ -103,7 +103,7 @@
     <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
         <div class="mui-panel panel-default">
             <div class="panel-body easypiechart-panel">
-                <h4>New Users</h4>
+                <h4>Новых пользователей</h4>
                 <div class="easypiechart" id="easypiechart-teal" data-percent="56">
                     <span class="percent">56%</span>
                 </div>
@@ -113,7 +113,7 @@
     <div class="mui-col-xs-12 mui-col-md-6 mui-col-lg-3">
         <div class="mui-panel panel-default">
             <div class="panel-body easypiechart-panel">
-                <h4>Visitors</h4>
+                <h4>Новых посетителей</h4>
                 <div class="easypiechart" id="easypiechart-red" data-percent="27">
                     <span class="percent">27%</span>
                 </div>
@@ -124,9 +124,9 @@
 
 <div class="mui-row">
     <div class="mui-col-md-12 mui-col-lg-4 panel-col">
-        <div class="mui-panel panel-success to-do-list-panel">
-            <div class="panel-heading dark-overlay">
-                <i class="fa fa-paperclip"></i>Список на добавление
+        <div class="mui-panel panel-default to-do-list-panel">
+            <div class="panel-heading">
+                Список на добавление
             </div>
             <div class="panel-body">
                 <ul class="todo-list" id="add-task">
@@ -187,9 +187,9 @@
     </div>
 
     <div class="mui-col-md-12 mui-col-lg-4 panel-col">
-        <div class="mui-panel panel-primary to-do-list-panel">
-            <div class="panel-heading dark-overlay">
-                <i class="fa fa-paperclip"></i>Список на редактирование
+        <div class="mui-panel panel-default to-do-list-panel">
+            <div class="panel-heading">
+                Список на редактирование
             </div>
             <div class="panel-body">
                 <ul class="todo-list" id="edit-task">
@@ -250,9 +250,9 @@
     </div>
 
     <div class="mui-col-md-12 mui-col-lg-4 panel-col">
-        <div class="mui-panel panel-danger to-do-list-panel">
-            <div class="panel-heading dark-overlay">
-                <i class="fa fa-paperclip"></i>Список на удаление
+        <div class="mui-panel panel-default to-do-list-panel">
+            <div class="panel-heading">
+                Список на удаление
             </div>
             <div class="panel-body">
                 <ul class="todo-list" id="remove-task">
@@ -308,6 +308,30 @@
                     </div>
                     <button class="mui-btn mui-btn--small" id="add-to-remove">Добавить</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mui-row">
+    <div class="mui-col-md-12">
+        <div class="mui-panel panel-default chat">
+            <div class="panel-heading" id="accordion">Сообщения</div>
+            <div class="panel-body">
+                <ul>
+                    @foreach (var message in Model.Messages)
+                    {
+                        var mailto = "mailto:" + message.Sender;
+                        <li class="left clearfix">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font"><a href="@mailto">@message.Sender</a></strong> <small class="text-muted">@message.Date</small>
+                                </div>
+                                <h3>@message.Title</h3>
+                                <p>@message.Body</p>
+                            </div>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
     </div>

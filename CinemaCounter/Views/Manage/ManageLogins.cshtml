@@ -1,71 +1,45 @@
-﻿@using Microsoft.Owin.Security
-@model CinemaCounter.Models.ManageLoginsViewModel
+﻿@model CinemaCounter.Models.ManageLoginsViewModel
 @{
     ViewBag.Title = "Управление внешними именами входа";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-<p class="text-success">@ViewBag.StatusMessage</p>
-@{
-    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0)
-    {
-        <div>
-            <p>
-                Внешние службы проверки подлинности не настроены. В <a href="http://go.microsoft.com/fwlink/?LinkId=313242">этой статье</a>
-                вы можете узнать о том, как в этом приложении ASP.NET настроить вход через внешние службы.
-            </p>
-        </div>
-    }
-    else
-    {
-        if (Model.CurrentLogins.Count > 0)
-        {
-            <h4>Зарегистрированные имена входа</h4>
-            <table class="table">
-                <tbody>
-                @foreach (var account in Model.CurrentLogins)
+<div class="mui-row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+            @{
+                if (Model.CurrentLogins.Count > 0)
                 {
-                    <tr>
-                        <td>@account.LoginProvider</td>
-                        <td>
-                            @if (ViewBag.ShowRemoveButton)
-                            {
-                                using (Html.BeginForm("RemoveLogin", "Manage"))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div>
-                                        @Html.Hidden("loginProvider", account.LoginProvider)
-                                        @Html.Hidden("providerKey", account.ProviderKey)
-                                        <input type="submit" class="btn btn-default" value="Удалить" title="Удалить это имя входа @account.LoginProvider из вашей учетной записи"/>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                @: &nbsp;
-                            }
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-        }
-        if (Model.OtherLogins.Count > 0)
-        {
-            using (Html.BeginForm("LinkLogin", "Manage"))
-            {
-                @Html.AntiForgeryToken()
-                <div id="socialLoginList">
-                    <p>
-                        @foreach (var p in Model.OtherLogins)
+                    <h4>Зарегистрированные имена входа</h4>
+                    foreach (var account in Model.CurrentLogins)
+                    {
+                        using (Html.BeginForm("RemoveLogin", "Manage"))
                         {
-                            <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Войти с помощью учетной записи @p.Caption">@p.AuthenticationType</button>
+                            @Html.AntiForgeryToken()
+                            <div>
+                                @Html.Hidden("loginProvider", account.LoginProvider)
+                                @Html.Hidden("providerKey", account.ProviderKey)
+                                <input type="submit" class="mui-btn mui-btn--primary btn-with-margin-auto" value="Удалить @account.LoginProvider" title="Удалить это имя входа @account.LoginProvider из вашей учетной записи"/>
+                            </div>
                         }
-                    </p>
-                </div>
+                    }
+                }
+                if (Model.OtherLogins.Count > 0)
+                {
+                    using (Html.BeginForm("LinkLogin", "Manage"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div id="socialLoginList">
+                            <p>
+                                @foreach (var p in Model.OtherLogins)
+                                {
+                                    <button type="submit" class="mui-btn mui-btn--primary btn-with-margin-auto" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Войти с помощью учетной записи @p.Caption">@p.AuthenticationType</button>
+                                }
+                            </p>
+                        </div>
+                    }
+                }
             }
-        }
-    }
-}
+        </div>
+    </div>
+</div>

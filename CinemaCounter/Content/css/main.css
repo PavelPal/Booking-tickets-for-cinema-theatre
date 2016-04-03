@@ -464,3 +464,239 @@ buttons {
 }
 
 .text-danger { color: red; }
+
+.account-action { margin-left: 20px; }
+
+@media screen and (max-width: 1055px) {
+    .btn-with-margin-auto {
+        display: block !important;
+        margin: 6px auto !important;
+    }
+}
+
+.btn-with-margin-auto-with {
+    display: block !important;
+    margin: 6px auto !important;
+}
+
+.tag {
+    -ms-border-radius: 50%;
+    background: #ccc;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.kc_fab_overlay {
+    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.5); /*dim the background*/
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9998;
+    z-index: 10;
+}
+
+.kc_fab_wrapper {
+    height: 240px;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: -70px;
+    width: 100%;
+    z-index: 9999;
+}
+
+.sub_fab_btns_wrapper {
+    -moz-transition: opacity 0.3s ease-in;
+    -ms-opacity: 0;
+    -ms-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in;
+    bottom: -320px;
+    display: none;
+    opacity: 0;
+    pointer-events: all;
+    position: absolute;
+    right: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+.kc_fab_wrapper-cinema .sub_fab_btns_wrapper {
+    bottom: -50px;
+}
+
+.sub_fab_btns_wrapper button[data-link-title]:hover:after {
+    -moz-min-width: 150px;
+    -moz-transition: all 0.5s;
+    -ms-border-radius: 3px;
+    -ms-min-width: 150px;
+    -ms-opacity: 1;
+    -ms-transition: all 0.5s;
+    -o-min-width: 150px;
+    -o-transition: all 0.5s;
+    -webkit-min-width: 150px;
+    -webkit-transition: all 0.5s;
+    background: #000000;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    color: #ffffff;
+    color: rgba(255, 255, 255, 0.8);
+    content: attr(data-link-title);
+    font-size: 13px;
+    min-width: 150px;
+    opacity: 1;
+    padding: 4px 10px;
+    pointer-events: none;
+    position: absolute;
+    right: 110%;
+    transition: all 0.5s;
+}
+
+.sub_fab_btns_wrapper.show {
+    -ms-opacity: 1;
+    display: block;
+    opacity: 1;
+}
+
+.sub_fab_btns_wrapper button {
+    -moz-transition: .3s;
+    -ms-border-radius: 100%;
+    -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -ms-transition: .3s;
+    -o-transition: .3s;
+    -webkit-box-shadow: 0 3px 6px #000000, 0 3px 6px #000000;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -webkit-transition: .3s;
+    background: #F44336;
+    border: none;
+    border-radius: 100%;
+    box-shadow: 0 3px 6px #000000, 0 3px 6px #000000;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: #FFF;
+    font-size: 19px;
+    height: 40px;
+    margin-bottom: 12px;
+    margin-right: 26px;
+    outline: none;
+    padding: 0;
+    pointer-events: all;
+    transition: .3s;
+    width: 40px;
+}
+
+button.kc_fab_main_btn {
+    -moz-transition: .3s;
+    -ms-border-radius: 100%;
+    -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -ms-transition: .3s;
+    -o-transition: .3s;
+    -webkit-box-shadow: 0 3px 6px #000000, 0 3px 6px #000000;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -webkit-tap-highlight-color: #000000;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-transition: .3s;
+    background: #F44336;
+    background-color: #F44336;
+    border: none;
+    border-radius: 100%;
+    bottom: 16px;
+    box-shadow: 0 3px 6px #000000, 0 3px 6px #000000;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: #FFF;
+    font-size: 36px;
+    height: 60px;
+    margin-bottom: 0;
+    margin-right: 0;
+    outline: none;
+    padding: 0;
+    pointer-events: all;
+    position: absolute;
+    right: 16px;
+    transition: .3s;
+    width: 60px;
+}
+
+.kc_fab_main_btn span {
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    -o-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.kc_fab_main_btn:focus {
+    -moz-transform: scale(1.1);
+    -ms-transform: rotate(45deg);
+    -o-transform: scale(1.1);
+    -webkit-transform: rotate(45deg);
+    transform: scale(1.1);
+    transform: rotate(45deg);
+}
+
+.ink {
+    -moz-transform: scale(0);
+    -ms-border-radius: 100%;
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    -webkit-transform: scale(0);
+    background: #ffffff;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    display: block;
+    pointer-events: all;
+    position: absolute;
+    transform: scale(0);
+}
+
+.animate {
+    -moz-animation: ripple 0.65s linear;
+    -ms-animation: ripple 0.65s linear;
+    -o-animation: ripple 0.65s linear;
+    -webkit-animation: ripple 0.65s linear;
+    animation: ripple 0.65s linear;
+}
+
+@-webkit-keyframes ripple {
+    100% {
+        -webkit-transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes ripple {
+    100% {
+        -moz-transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+@-o-keyframes ripple {
+    100% {
+        -o-transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+
+.mui-select__menu {
+    max-height: 400px;
+    margin-top: 50px;
+}
+
+textarea {
+    max-width: 100%;
+    max-height: 150px;
+}
+
+.panel-block img {
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="c4efeabd-854a-4f1f-8f61-d5d5cc29c9ed" name="Activity1" linkedPackageId="9ac5fe5d-a42f-4548-865e-db3452ed884b" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="01b89ba4-4a7d-4011-856d-b2715caebd1c">
+      <profileInstance Id="cb0370d1-18cc-4744-9903-4bef9309845d" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="80d131ae-0368-4590-b698-6dcfeda9f2e5">
+      <profileInstance Id="d9418be1-9899-44e9-a694-b1adf532d6ec" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="d70c918f-fd80-4ca8-87e9-3f501b5b2b2a" name="Activity1" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="c7a95039-237f-4e23-bd8f-2a3c69f38463" />
+        <nodes>
+          <initialNode Id="ed1527a1-bdec-41e0-b210-c4748c6cb229" name="Initial1" isLeaf="false">
+            <elementDefinition Id="4c7913f8-1e1d-4246-a189-1088e5da5cbc" />
+            <flowNodeTargets>
+              <controlFlow Id="44f635b6-05a8-49d1-8002-63c39a8136a3" isLeaf="false">
+                <opaqueActionMoniker Id="ff73d7be-8601-4ea7-b90f-e589484e1e8b" LastKnownName="просмотреть главную страницу" />
+                <elementDefinition Id="bcda995f-4b41-4637-80be-32e836d89cf8" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <activityFinalNode Id="193fe4ad-5bbe-45e6-96d8-21aaf93e9206" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="2d4aea3c-d385-43f7-a547-d66db7a7dc87" />
+          </activityFinalNode>
+          <opaqueAction Id="ff73d7be-8601-4ea7-b90f-e589484e1e8b" name="просмотреть главную страницу" isLeaf="false">
+            <elementDefinition Id="2de892a1-2664-4e22-a440-32fb6df07894" />
+            <flowNodeTargets>
+              <controlFlow Id="66c94ee4-046d-405e-abd6-7e511326dfed" isLeaf="false">
+                <forkNodeMoniker Id="b868c1c0-9a34-47de-a2c9-015efb352cb6" LastKnownName="Fork1" />
+                <elementDefinition Id="09945c0d-224f-45e2-901b-26bffaca0514" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode Id="b868c1c0-9a34-47de-a2c9-015efb352cb6" name="Fork1" isLeaf="false">
+            <elementDefinition Id="7b30d18b-8e77-4958-8e49-443e0771de89" />
+            <flowNodeTargets>
+              <controlFlow Id="d8bd81a0-d066-4447-b2ce-95c1381a5264" isLeaf="false">
+                <opaqueActionMoniker Id="64136e57-848e-4bdc-aa53-edd15e1b4bca" LastKnownName="просмотреть список всех кинотеатров" />
+                <elementDefinition Id="c55449eb-abc9-438f-b7e1-65f51897924d" />
+              </controlFlow>
+              <controlFlow Id="659ca657-e681-47e0-a4f2-a3e186fe9970" isLeaf="false">
+                <opaqueActionMoniker Id="63db0593-4aa1-4a54-84f0-f8f82a85c501" LastKnownName="просмотреть список всех сеансов" />
+                <elementDefinition Id="7740c0a8-2999-46f7-8a8d-6d540b6825cb" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <opaqueAction Id="64136e57-848e-4bdc-aa53-edd15e1b4bca" name="просмотреть список всех кинотеатров" isLeaf="false">
+            <elementDefinition Id="48984fa7-92a8-4f8e-9bc6-db54e8242038" />
+            <flowNodeTargets>
+              <controlFlow Id="1a19d946-1c5a-4557-87bf-bebed8f6f35d" isLeaf="false">
+                <decisionNodeMoniker Id="b3aec854-215a-4daf-9084-ae1d19197e4b" LastKnownName="Decision1" />
+                <elementDefinition Id="e6e3f398-1c86-4028-acc5-f18209e74655" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="63db0593-4aa1-4a54-84f0-f8f82a85c501" name="просмотреть список всех сеансов" isLeaf="false">
+            <elementDefinition Id="3c731fd2-7f0c-48ca-aaad-2c7723c9f5fe" />
+            <flowNodeTargets>
+              <controlFlow Id="a3ea622a-05c7-448d-b4fe-f5db03a15b69" isLeaf="false">
+                <joinNodeMoniker Id="487b4e4e-4190-4cfe-81e0-23736168312a" LastKnownName="Join1" />
+                <elementDefinition Id="38fe7ae4-e484-4454-bf9c-8aafe88293bf" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="86273a18-ee25-4962-9a0d-d63ec8927945" name="просмотреть информацию о кинотеатре" isLeaf="false">
+            <elementDefinition Id="3844d05e-5c8b-4ad5-a931-189eefc88efc" />
+            <flowNodeTargets>
+              <controlFlow Id="4c94c741-4bb9-4826-8963-bee31967828b" isLeaf="false">
+                <opaqueActionMoniker Id="df93bd0b-407d-4be0-b391-c66a67c835bf" LastKnownName="просмотреть сеансы в кинотеатре" />
+                <elementDefinition Id="b5fe37e2-5326-4268-95ac-0eb806d048d6" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="df93bd0b-407d-4be0-b391-c66a67c835bf" name="просмотреть сеансы в кинотеатре" isLeaf="false">
+            <elementDefinition Id="baa3305f-ff40-427d-b596-80cd81f51b50" />
+            <flowNodeTargets>
+              <controlFlow Id="bf722dda-ac36-4c1f-8945-64f66dfd1664" isLeaf="false">
+                <joinNodeMoniker Id="487b4e4e-4190-4cfe-81e0-23736168312a" LastKnownName="Join1" />
+                <elementDefinition Id="4e06ba8b-bf63-442e-a6d3-d27ef1a31b1f" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="b3aec854-215a-4daf-9084-ae1d19197e4b" name="Decision1" isLeaf="false">
+            <elementDefinition Id="75eb12e3-a39b-447c-ab64-640072b7dede" />
+            <flowNodeTargets>
+              <controlFlow Id="85e20fdd-213a-4012-b0c9-bc39caf4ba95" isLeaf="false">
+                <opaqueActionMoniker Id="86273a18-ee25-4962-9a0d-d63ec8927945" LastKnownName="просмотреть информацию о кинотеатре" />
+                <elementDefinition Id="66eda261-b870-4211-b131-5682fe12f178" />
+              </controlFlow>
+              <controlFlow Id="dd0868f3-40fd-45bf-a087-afbc955ab34f" isLeaf="false">
+                <opaqueActionMoniker Id="ff73d7be-8601-4ea7-b90f-e589484e1e8b" LastKnownName="просмотреть главную страницу" />
+                <elementDefinition Id="3207e0b1-56f6-4e84-a5f8-7a58aecc5f4c" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <joinNode Id="487b4e4e-4190-4cfe-81e0-23736168312a" name="Join1" isLeaf="false">
+            <elementDefinition Id="743b404c-b902-46e0-bd98-7889906d7c5b" />
+            <flowNodeTargets>
+              <controlFlow Id="6419f287-7797-4099-bd94-53b2b9c432d9" isLeaf="false">
+                <decisionNodeMoniker Id="7ea1453c-1479-432d-b643-9fe0a95453d8" LastKnownName="Decision2" />
+                <elementDefinition Id="985e1b7f-2211-47c8-91a3-4a8d042c7402" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <decisionNode Id="7ea1453c-1479-432d-b643-9fe0a95453d8" name="Decision2" isLeaf="false">
+            <elementDefinition Id="4ce69ac4-d039-4234-aad9-164b7cc11856" />
+            <flowNodeTargets>
+              <controlFlow Id="003869ea-c9a8-44dc-8db4-fb77bafb4644" isLeaf="false">
+                <opaqueActionMoniker Id="06742182-cf0d-428a-b811-959ebffbdec2" LastKnownName="просмотреть сеансы по дате" />
+                <elementDefinition Id="392892b0-2ae4-40ee-b0d1-9cb4f44b5ad3" />
+              </controlFlow>
+              <controlFlow Id="a4cd1bdf-0c49-4d76-a223-5e65a002c3b9" isLeaf="false">
+                <opaqueActionMoniker Id="6be29613-ef35-4743-9482-3938330a8c52" LastKnownName="просмотреть информацию о сеансе" />
+                <elementDefinition Id="e6da22ac-ae52-4afa-a534-90f995a51d76" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="6be29613-ef35-4743-9482-3938330a8c52" name="просмотреть информацию о сеансе" isLeaf="false">
+            <elementDefinition Id="7ef034da-93e4-4a83-9476-87b7f8fc58b3" />
+            <flowNodeTargets>
+              <controlFlow Id="3fb670fc-2840-44d6-80cc-4ae7b2e24d49" isLeaf="false">
+                <decisionNodeMoniker Id="6387bfaf-bf71-461e-86e4-f255b49d8d7f" LastKnownName="Decision3" />
+                <elementDefinition Id="8b4ccba0-e795-43ef-ba42-ff57b4e1114e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="06742182-cf0d-428a-b811-959ebffbdec2" name="просмотреть сеансы по дате" isLeaf="false">
+            <elementDefinition Id="446503f5-e732-4cdd-bc11-6da8863e41a0" />
+            <flowNodeTargets>
+              <controlFlow Id="fac50123-a04c-4b02-a93a-a7a7c1f5ee3c" isLeaf="false">
+                <opaqueActionMoniker Id="6be29613-ef35-4743-9482-3938330a8c52" LastKnownName="просмотреть информацию о сеансе" />
+                <elementDefinition Id="611d5d1c-509a-4ea4-a646-79c6b8f6721e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="01179646-eaf7-4207-98a4-9dec021ec0c8" name="заполнение бланка бронирования" isLeaf="false">
+            <elementDefinition Id="317e91b1-f302-4205-8871-2ed97833dce7" />
+            <flowNodeTargets>
+              <controlFlow Id="7b6c43e3-0099-4d7d-9bce-25d18d1a7096" isLeaf="false">
+                <opaqueActionMoniker Id="7ea8b68c-ff76-41a1-afee-ae0fc4763ea8" LastKnownName="отправка бланка администратору" />
+                <elementDefinition Id="09e69eb1-9a29-4755-8274-a2d86fe24495" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="7ea8b68c-ff76-41a1-afee-ae0fc4763ea8" name="отправка бланка администратору" isLeaf="false">
+            <elementDefinition Id="1bc79de5-190b-4220-a50b-5f96a8ee70b3" />
+            <flowNodeTargets>
+              <controlFlow Id="7b190521-7698-46f0-a692-6518b838868e" isLeaf="false">
+                <opaqueActionMoniker Id="36a8ec5a-5832-4b17-88a1-403e8df72d34" LastKnownName="получение ответа" />
+                <elementDefinition Id="ba470a11-a580-4787-a1c3-868ec94a17a3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="36a8ec5a-5832-4b17-88a1-403e8df72d34" name="получение ответа" isLeaf="false">
+            <elementDefinition Id="e7b6d3e2-c5a4-4b23-8e67-041e4a56e744" />
+            <flowNodeTargets>
+              <controlFlow Id="b4c5f3d5-6fea-4473-95cc-a367ff9f6025" isLeaf="false">
+                <opaqueActionMoniker Id="45388542-7b42-494f-afc0-77abdfe557e2" LastKnownName="подтверждение брони" />
+                <elementDefinition Id="6950b000-7fa8-4503-9f33-8c992c5cc3ec" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="45388542-7b42-494f-afc0-77abdfe557e2" name="подтверждение брони" isLeaf="false">
+            <elementDefinition Id="c041374c-906a-44a0-ba9c-cc0c3c3a2add" />
+            <flowNodeTargets>
+              <controlFlow Id="f634abbc-bda3-4b48-87f0-7376f8ba281d" isLeaf="false">
+                <opaqueActionMoniker Id="2ce0614c-3578-4e6e-9108-3313cce2723d" LastKnownName="просмотреть главную страницу" />
+                <elementDefinition Id="37270a58-7bbe-4f8a-a384-f07b6d6e69b2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="2ce0614c-3578-4e6e-9108-3313cce2723d" name="просмотреть главную страницу" isLeaf="false">
+            <elementDefinition Id="b327f0a5-345a-41ac-91e0-ea922672f767" />
+            <flowNodeTargets>
+              <controlFlow Id="ed5e9526-486b-42c7-a8ed-95dc0995aa28" isLeaf="false">
+                <activityFinalNodeMoniker Id="193fe4ad-5bbe-45e6-96d8-21aaf93e9206" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="bc093ff3-4fd8-4cce-8be9-14b9356fb5be" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="6387bfaf-bf71-461e-86e4-f255b49d8d7f" name="Decision3" isLeaf="false">
+            <elementDefinition Id="d81e3c23-5b3c-4729-a645-2af1dab45b32" />
+            <flowNodeTargets>
+              <controlFlow Id="b43f8240-0ba6-4276-9fe6-7e9f6e43561a" isLeaf="false">
+                <opaqueActionMoniker Id="2ce0614c-3578-4e6e-9108-3313cce2723d" LastKnownName="просмотреть главную страницу" />
+                <elementDefinition Id="105b727c-ac9d-4b02-8582-738ce684a12d" />
+              </controlFlow>
+              <controlFlow Id="49514a46-d5b6-4364-8d80-67ce52ff5ca6" isLeaf="false">
+                <opaqueActionMoniker Id="01179646-eaf7-4207-98a4-9dec021ec0c8" LastKnownName="заполнение бланка бронирования" />
+                <elementDefinition Id="ff1cf481-bc48-4fdd-a4e4-0112365f020f" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="9ac5fe5d-a42f-4548-865e-db3452ed884b" name="ModelingProject1">
+    <elementDefinition Id="3698432a-4100-49e2-89d3-47f25f26b460" />
+  </package>
+</activityRootModel>

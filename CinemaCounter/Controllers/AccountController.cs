@@ -64,7 +64,9 @@ namespace CinemaCounter.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return User.IsInRole("admin")
+                        ? RedirectToAction("Statistic", "Admin")
+                        : RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -369,6 +371,7 @@ namespace CinemaCounter.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        await UserManager.AddToRoleAsync(user.Id, "user");
                         await SignInManager.SignInAsync(user, false, false);
                         return RedirectToLocal(returnUrl);
                     }

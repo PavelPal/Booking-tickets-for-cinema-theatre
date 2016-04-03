@@ -2,9 +2,11 @@
     ViewBag.Title = "Подтверждение почты";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Благодарим за подтверждение электронной почты. @Html.ActionLink("Щелкните здесь для входа", "Login", "Account", null, new {id = "loginLink"})
-    </p>
+<div class="mui-row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+            <p>Благодарим за подтверждение электронной почты. @Html.ActionLink("Щелкните здесь для входа", "Login", "Account", null, new {id = "loginLink"})</p>
+        </div>
+    </div>
 </div>

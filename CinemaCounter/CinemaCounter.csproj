@@ -43,9 +43,13 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Duke.Owin.VkontakteMiddleware, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Duke.Owin.VkontakteMiddleware.1.2.0.0\lib\net45\Duke.Owin.VkontakteMiddleware.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -185,15 +189,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603060501081_DataMigration.cs" />
-    <Compile Include="Migrations\201603060501081_DataMigration.Designer.cs">
-      <DependentUpon>201603060501081_DataMigration.cs</DependentUpon>
+    <Compile Include="Helpers\HtmlExtensions.cs" />
+    <Compile Include="Migrations\201603312013208_DataMigration.cs" />
+    <Compile Include="Migrations\201603312013208_DataMigration.Designer.cs">
+      <DependentUpon>201603312013208_DataMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin\SessionViewModel.cs" />
     <Compile Include="Models\Admin\AdminService.cs" />
     <Compile Include="Models\Admin\IAdminService.cs" />
     <Compile Include="Models\Admin\IndexViewModel.cs" />
+    <Compile Include="Models\Admin\SessionsViewModel.cs" />
     <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\Cinema\CinemaService.cs" />
     <Compile Include="Models\Cinema\CinemaViewModel.cs" />
@@ -208,6 +215,8 @@
     <Compile Include="Models\DAO\Director\IDirectorDao.cs" />
     <Compile Include="Models\DAO\Genre\GenreDao.cs" />
     <Compile Include="Models\DAO\Genre\IGenreDao.cs" />
+    <Compile Include="Models\DAO\Message\IMessageDao.cs" />
+    <Compile Include="Models\DAO\Message\MessageDao.cs" />
     <Compile Include="Models\DAO\Scene\ISceneDao.cs" />
     <Compile Include="Models\DAO\Task\ITaskDao.cs" />
     <Compile Include="Models\DAO\Task\TaskDao.cs" />
@@ -223,6 +232,7 @@
     <Compile Include="Models\Entities\Company.cs" />
     <Compile Include="Models\Entities\Director.cs" />
     <Compile Include="Models\Entities\Genre.cs" />
+    <Compile Include="Models\Entities\Message.cs" />
     <Compile Include="Models\Entities\Scene.cs" />
     <Compile Include="Models\Entities\Session.cs" />
     <Compile Include="Models\Entities\Task.cs" />
@@ -251,6 +261,7 @@
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\date-time.css" />
     <Content Include="Content\css\mui.css" />
     <Content Include="Content\css\mui.min.css" />
     <Content Include="Content\fonts\admin\glyphicons-halflings-regular.svg" />
@@ -270,6 +281,8 @@
     <Content Include="Scripts\admin\jquery-1.11.1.min.js" />
     <Content Include="Scripts\admin\lumino.glyphs.js" />
     <Content Include="Scripts\admin\respond.min.js" />
+    <Content Include="Scripts\admin\sessions-admin.js" />
+    <Content Include="Scripts\bootstrap-material.min.js" />
     <Content Include="Scripts\functions.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />
     <Content Include="Scripts\jquery-2.2.1.min.js" />
@@ -290,7 +303,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\date-time.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\mui.js" />
     <Content Include="Scripts\mui.min.js" />
     <Content Include="Scripts\respond.js" />
@@ -333,25 +348,38 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Session\Index.cshtml" />
-    <Content Include="Views\Session\Session.cshtml" />
     <Content Include="Views\Cinema\Cinema.cshtml" />
-    <Content Include="Views\Admin\AdminPanel.cshtml" />
     <Content Include="Views\Admin\Cinemas.cshtml" />
-    <Content Include="Views\Admin\Scenes.cshtml" />
     <Content Include="Views\Admin\Sessions.cshtml" />
+    <Content Include="Views\Admin\Statistic.cshtml" />
+    <Content Include="Views\Admin\AddScene.cshtml" />
+    <Content Include="Views\Admin\AddSession.cshtml" />
+    <Content Include="Views\Admin\AddActor.cshtml" />
+    <Content Include="Views\Admin\AddGenre.cshtml" />
+    <Content Include="Views\Admin\AddCompany.cshtml" />
+    <Content Include="Views\Admin\AddDirector.cshtml" />
+    <Content Include="Views\Admin\EditSession.cshtml" />
+    <Content Include="Views\Admin\EditScene.cshtml" />
+    <Content Include="Views\Admin\AddCinema.cshtml" />
+    <Content Include="Views\Admin\DeleteCinema.cshtml" />
+    <Content Include="Views\Admin\EditCinema.cshtml" />
+    <Content Include="Views\Admin\DeleteSession.cshtml" />
+    <Content Include="Views\Session\Today.cshtml" />
+    <Content Include="Views\Session\Week.cshtml" />
+    <Content Include="Views\Session\Month.cshtml" />
+    <Content Include="Views\Session\Session.cshtml" />
+    <Content Include="Views\Session\Book.cshtml" />
+    <Content Include="Views\Session\Complete.cshtml" />
     <Content Include="Views\Admin\Tickets.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Shared\_LoginPartialAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603060501081_DataMigration.resx">
-      <DependentUpon>201603060501081_DataMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603312013208_DataMigration.resx">
+      <DependentUpon>201603312013208_DataMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -50,6 +50,7 @@ namespace CinemaCounter.Models.Entities
         [Display(Name = "Номер телефона")]
         public string Phone { get; set; }
 
+        public string ImagePath { get; set; }
         public ICollection<Session> Sessions { get; set; }
     }
 }

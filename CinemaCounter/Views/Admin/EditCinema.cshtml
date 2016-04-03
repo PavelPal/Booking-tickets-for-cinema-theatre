@@ -1,0 +1,56 @@
+﻿@model CinemaCounter.Models.Entities.Cinema
+
+@{
+    ViewBag.Title = "Редактировать";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mui-row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+
+            @using (Html.BeginForm("EditCinema", "Admin", new { ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <legend>Заполните поля</legend>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Name, new { required = "", placeholder = Html.DisplayNameFor(m => m.Name) })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Town, new { required = "", placeholder = Html.DisplayNameFor(m => m.Town) })
+                    @Html.ValidationMessageFor(model => model.Town, "", new { @class = "text-danger" })
+                </div>
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Street, new { required = "", placeholder = Html.DisplayNameFor(m => m.Street) })
+                    @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                </div>
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Building, new { required = "", placeholder = Html.DisplayNameFor(m => m.Building) })
+                    @Html.ValidationMessageFor(model => model.Building, "", new { @class = "text-danger" })
+                </div>
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Station, new { required = "", placeholder = Html.DisplayNameFor(m => m.Station) })
+                    @Html.ValidationMessageFor(model => model.Station, "", new { @class = "text-danger" })
+                </div>
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.WebSite, new { required = "", placeholder = Html.DisplayNameFor(m => m.WebSite) })
+                    @Html.ValidationMessageFor(model => model.WebSite, "", new { @class = "text-danger" })
+                </div>
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Phone, new { required = "", placeholder = Html.DisplayNameFor(m => m.Phone) })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.ImagePath, new { required = "", placeholder = "Путь к изображению" })
+                    @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="mui-btn mui-btn--primary">Создать</button>
+                @Html.ActionLink("Вернуться назад", "Cinemas", "Admin", null, new { @class = "account-action" })
+            }
+        </div>
+    </div>
+</div>

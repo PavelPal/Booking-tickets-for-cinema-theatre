@@ -8,6 +8,7 @@ using CinemaCounter.Models.DAO.Cinema;
 using CinemaCounter.Models.DAO.Company;
 using CinemaCounter.Models.DAO.Director;
 using CinemaCounter.Models.DAO.Genre;
+using CinemaCounter.Models.DAO.Message;
 using CinemaCounter.Models.DAO.Scene;
 using CinemaCounter.Models.DAO.Session;
 using CinemaCounter.Models.DAO.Task;
@@ -87,6 +88,7 @@ namespace CinemaCounter.App_Start
             kernel.Bind<IAdminService>().To<AdminService>();
             kernel.Bind<IUserDao>().To<UserDao>();
             kernel.Bind<ITaskDao>().To<TaskDao>();
+            kernel.Bind<IMessageDao>().To<MessageDao>();
         }
     }
 }

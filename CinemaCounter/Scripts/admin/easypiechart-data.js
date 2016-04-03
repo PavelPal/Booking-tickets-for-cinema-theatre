@@ -1,30 +1,31 @@
 $(function() {
-    $('#easypiechart-teal').easyPieChart({
+    $("#easypiechart-teal").easyPieChart({
         scaleColor: false,
-        barColor: '#1ebfae'
+        barColor: "#1ebfae"
     });
 });
 
 $(function() {
-    $('#easypiechart-orange').easyPieChart({
+    $("#easypiechart-orange").easyPieChart({
         scaleColor: false,
-        barColor: '#ffb53e'
+        barColor: "#ffb53e"
     });
 });
 
 $(function() {
-    $('#easypiechart-red').easyPieChart({
+    $("#easypiechart-red").easyPieChart({
         scaleColor: false,
-        barColor: '#f9243f'
+        barColor: "#f9243f"
     });
 });
 
 $(function() {
-   $('#easypiechart-blue').easyPieChart({
-       scaleColor: false,
-       barColor: '#30a5ff'
-   });
+    $("#easypiechart-blue").easyPieChart({
+        scaleColor: false,
+        barColor: "#30a5ff"
+    });
 });
 
-$('#calendar').datepicker({
-	});
+$("#calendar").datepicker({
+	
+});

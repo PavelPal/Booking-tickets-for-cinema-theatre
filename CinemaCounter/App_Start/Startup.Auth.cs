@@ -1,5 +1,6 @@
 ﻿using System;
 using CinemaCounter.Models;
+using Duke.Owin.VkontakteMiddleware;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -49,19 +50,23 @@ namespace CinemaCounter
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+//            app.UseTwitterAuthentication("foQJWeyIT36aMyuprxrYHBHf1",
+//                "aYunfWk5OMePgJjq76Y6BctjdlaStzBVt0k8UqLJCM7IeG3N2m");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication("599148536892113", "487a1f4e4203d835cf50fb1757d7aab4");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            app.UseVkontakteAuthentication(new VkAuthenticationOptions
+            {
+                AppId = "5039046",
+                AppSecret = "Mx50IHof1nu2VRdTTjx6",
+                Scope = "email"
+            });
         }
     }
 }

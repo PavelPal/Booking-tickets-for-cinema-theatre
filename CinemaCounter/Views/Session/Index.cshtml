@@ -1,8 +1,98 @@
-﻿
+﻿@model List<CinemaCounter.Models.Entities.Session>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="mui--text-display1 mui--text-dark-secondary page-title">Киносеансы</div>
+<div class="mui-row">
+    @if (Model.Count == 0)
+    {
+        <div class="mui-col-md-12">
+            <div class="mui-panel">
+                <div class="mui--text-headline">Пусто</div>
+                <div class="panel-block">
+                    <div class="mui--text-body1">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x text-info"></i>
+                            <i class="fa fa-info fa-stack-1x white-text"></i>
+                        </span> На данный момент сеансы отсутствуют.
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="sessions-block" class="mui-col-md-12 item-blocks">
+            @foreach (var item in Model)
+            {
+                <div class="item-block">
+                    <div class="mui-panel">
+                        <div class="mui--text-headline">@item.Scene.Name</div>
+                        <div class="panel-block">
+                            <div class="mui--text-body2">
+                                Время проведения: @item.Date<br />
+                                Кинотеатр: @item.Cinema.Name<br />
+                            </div>
+                        </div>
+                        @Html.ActionLink("Подробнее", "Session", "Session", new { id = item.Id }, new { @class = "mui-btn mui-btn--flat mui-btn--primary" })
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="sessions-load-box" class="mui-col-md-12">
+            <div class="center-block">
+                <a class="mui-btn mui-btn--raised mui-btn--primary" id="load-more-sessions-btn">Показать больше</a>
+            </div>
+        </div>
+    }
+</div>
 
+<script>
+    $(document).ready(function () {
+        var skipSessions = 3,
+            inSessionProgrss = false;
+        $("#load-more-sessions-btn").click(function () {
+            $.ajax({
+                url: "/Home/LoadMoreSessions",
+                method: "GET",
+                data: { 'skip': skipSessions },
+                beforeSend: function () {
+                    inSessionProgrss = true;
+                    $("#fountainG").css({
+                        '-ms-opacity': "1",
+                        'opacity': "1"
+                    });
+                },
+                complete: function () {
+                    $("#fountainG").css({
+                        '-ms-opacity': "0",
+                        'opacity': "0"
+                    });
+                }
+            }).done(function (data) {
+                if (data.length > 0) {
+                    $("#sessions-load-box").css("display", "block");
+                    $.each(data, function (index, data) {
+                        $("#sessions-block").append("<div class=\"item-block\">" +
+                            "<div class=\"mui-panel\">" +
+                            "<div class=\"mui--text-headline\">" + data.Scene.Name + "</div>" +
+                            "<div class=\"panel-block\">" +
+                            "<div class=\"mui--text-body2\">Время проведения: " + data.Date + "<br />" +
+                            "Кинотеатр: " + data.Cinema.Name +
+                            "</div></div>" +
+                            "<a href=\"Session/Session/" + data.Id + "\" class=\"mui-btn mui-btn--flat mui-btn--primary\">Подробнее</a>" + "</div></div>");
+                    });
+                    inSessionProgrss = false;
+                    skipSessions += 9;
+                } else {
+                    $("#sessions-load-box").css("display", "none");
+                }
+                if (data.length < 9) {
+                    $("#sessions-load-box").css("display", "none");
+                }
+            });
+        });
+    });
+</script>

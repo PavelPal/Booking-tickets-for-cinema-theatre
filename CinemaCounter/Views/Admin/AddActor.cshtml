@@ -1,0 +1,27 @@
+﻿@model CinemaCounter.Models.Entities.Actor
+
+@{
+    ViewBag.Title = "Добавить актера";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mui-row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+
+            @using (Html.BeginForm("AddActor", "Admin", new {ViewBag.ReturnUrl}, FormMethod.Post, new {role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+                <legend>Заполните поле</legend>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Name, new {required = "", placeholder = Html.DisplayNameFor(m => m.Name)})
+                    @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                </div>
+                <button type="submit" class="mui-btn mui-btn--primary">Создать</button>
+                @Html.ActionLink("Вернуться назад", "Sessions", "Admin", null, new {@class = "account-action"})
+            }
+        </div>
+    </div>
+</div>

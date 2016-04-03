@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CinemaCounter.Models.Entities;
 using CinemaCounter.Models.Home;
 
 namespace CinemaCounter.Controllers
@@ -41,6 +42,14 @@ namespace CinemaCounter.Controllers
         public ActionResult Contact()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(Message message)
+        {
+            if (!ModelState.IsValid) return View(message);
+            _homeService.SendMessage(message);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -4,18 +4,13 @@
 <div class="mui--text-title">Используйте для входа другую службу</div>
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0)
+
+    using (Html.BeginForm("ExternalLogin", "Account", new {Model.ReturnUrl}))
     {
-    }
-    else
-    {
-        using (Html.BeginForm("ExternalLogin", "Account", new {Model.ReturnUrl}))
+        @Html.AntiForgeryToken()
+        foreach (var p in loginProviders)
         {
-            @Html.AntiForgeryToken()
-            foreach (var p in loginProviders)
-            {
-                <button type="submit" class="mui-btn mui-btn--raised" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Войти с помощью учетной записи @p.Caption">@p.AuthenticationType</button>
-            }
+            <button type="submit" class="mui-btn mui-btn--primary btn-with-margin-auto" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Войти с помощью учетной записи @p.Caption">@p.AuthenticationType</button>
         }
     }
 }

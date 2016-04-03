@@ -8,6 +8,7 @@ namespace CinemaCounter.Models.DAO.Cinema
         void Edit(Entities.Cinema cinema);
         void Delete(int id);
         Entities.Cinema Load(int id);
+        List<Entities.Cinema> Load();
         List<Entities.Cinema> Load(int skip, int take);
         int Count();
     }

@@ -1,6 +1,158 @@
-﻿@{
+﻿@using CinemaCounter.Helpers
+@model List<CinemaCounter.Models.Entities.Scene>
+@{
     ViewBag.Title = "Sessions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Sessions</h2>
+<link rel="stylesheet" type="text/css" href="~/Content/css/date-time.css"/>
+
+<script type="text/javascript" src="~/Scripts/bootstrap-material.min.js"></script>
+<script type="text/javascript" src="~/Scripts/moment-with-locales.js"></script>
+<script src="~/Scripts/date-time.js"></script>
+<script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments);
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-60343429-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+<div class="mui--text-display1 mui--text-dark-secondary page-title">Сеансы</div>
+
+<div class="mui-row">
+    <div class="mui-col-xs-12">
+        <div class="mui-panel panel-blue panel-widget">
+            <div class="mui-row no-padding">
+                <div class="mui-col-xs-4 mui-col-sm-5 mui-col-lg-3 widget-left">
+                    <i class="fa fa-calendar fa-3x"></i>
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-7 mui-col-lg-9 widget-right">
+                    <div class="mui-textfield">
+                        <input type="text" id="date" class="floating-label" placeholder="Date">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mui-row">
+    <div class="mui-col-xs-12">
+        <div class="mui-panel">
+            <div class="mui-row no-padding">
+                <table class="mui-table mui-table--bordered">
+                    <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Жанр</th>
+                        <th>Дата выхода в прокат</th>
+                        <th>Продолжительность</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td>
+                                @foreach (var genre in item.Genres)
+                                {
+                                    <i class="fa fa-tag"></i> @genre.Name<br />
+                                }
+                            </td>
+                            <td>@item.DataOfCreated</td>
+                            <td>@item.Duration мин.</td>
+                            <td>
+                                @foreach (var session in item.Sessions)
+                                {
+                                    <i class="fa fa-file-movie-o"></i> @session.Date <span>в</span> @session.Cinema.Name<br />
+                                }
+                            </td>
+                            <td>
+                                @Html.ActonLinkWithTags("<i class=\"fa fa-pencil\"></i>", "EditScene", "Admin", new { id = item.Id }, null)
+                                @Html.ActonLinkWithTags("<i class=\"fa fa-trash\"></i>", "DeleteScene", "Admin", new { id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kc_fab_wrapper"></div>
+
+<script src="~/Scripts/admin/sessions-admin.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#date').bootstrapMaterialDatePicker
+        ({
+            time: false,
+            clearButton: true
+        });
+        $.material.init();
+
+        var links = [
+            {
+                "bgcolor": "#0d47a1",
+                "icon": "+"
+            },
+            {
+                "url": "/Admin/AddScene",
+                "bgcolor": "#303f9f",
+                "color": "#fffff",
+                "icon": "<i class='fa fa-film'></i>",
+                "title": "фильм"
+            },
+            {
+                "url": "/Admin/AddSession",
+                "bgcolor": "#7b1fa2",
+                "color": "white",
+                "icon": "<i class='fa fa-video-camera'></i>",
+                "title": "сеанс"
+            },
+            {
+                "url": "/Admin/AddActor",
+                "bgcolor": "#c2185b",
+                "color": "white",
+                "icon": "<i class='fa fa-users'></i>",
+                "title": "актер"
+            },
+            {
+                "url": "/Admin/AddGenre",
+                "bgcolor": "#d32f2f",
+                "color": "white",
+                "icon": "<i class='fa fa-file-text-o'></i>",
+                "title": "жанр"
+            },
+            {
+                "url": "/Admin/AddCompany",
+                "bgcolor": "#e65100",
+                "color": "white",
+                "icon": "<i class='fa fa-building-o'></i>",
+                "title": "компания"
+            },
+            {
+                "url": "/Admin/AddDirector",
+                "bgcolor": "#fbc02d",
+                "color": "white",
+                "icon": "<i class='fa fa-user'></i>",
+                "title": "режиссер"
+            }
+        ];
+        $('.kc_fab_wrapper').kc_fab(links);
+    });
+</script>

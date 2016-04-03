@@ -7,10 +7,16 @@ namespace CinemaCounter.Models.DAO.Session
 {
     public class SessionDao : ISessionDao
     {
-        public void Add(Entities.Session session)
+        public void Add(int cinemaId, int sceneId, DateTime date)
         {
             using (var context = new ApplicationDbContext())
             {
+                var session = new Entities.Session
+                {
+                    Cinema = context.Cinemas.FirstOrDefault(c => c.Id == cinemaId),
+                    Date = date,
+                    Scene = context.Scenes.FirstOrDefault(s => s.Id == sceneId)
+                };
                 context.Sessions.Add(session);
                 context.SaveChanges();
             }
@@ -72,17 +78,17 @@ namespace CinemaCounter.Models.DAO.Session
             return sessions;
         }
 
-        public List<Entities.Session> LoadToday(int skip, int take)
+        public List<Entities.Session> LoadToday()
         {
             List<Entities.Session> sessions;
             using (var context = new ApplicationDbContext())
             {
-                sessions = context.Sessions.Where(s => s.Date.Date == DateTime.Today).ToList();
+                sessions = context.Sessions.Where(s => s.Date == DateTime.Today).ToList();
             }
             return sessions;
         }
 
-        public List<Entities.Session> LoadWeek(int skip, int take)
+        public List<Entities.Session> LoadWeek()
         {
             List<Entities.Session> sessions;
             using (var context = new ApplicationDbContext())
@@ -97,7 +103,7 @@ namespace CinemaCounter.Models.DAO.Session
             return sessions;
         }
 
-        public List<Entities.Session> LoadMonth(int skip, int take)
+        public List<Entities.Session> LoadMonth()
         {
             List<Entities.Session> sessions;
             using (var context = new ApplicationDbContext())

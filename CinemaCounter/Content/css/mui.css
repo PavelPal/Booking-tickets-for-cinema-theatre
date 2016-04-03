@@ -409,6 +409,7 @@ html {
 
 body {
     background-color: #FFF;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
     font-family: Arial, Verdana, Tahoma;
     font-size: 14px;
@@ -463,6 +464,7 @@ hr {
 
 legend {
     border: 0;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
     display: block;
     font-size: 21px;
@@ -559,6 +561,7 @@ h4, h5, h6 {
     background-image: none;
     border: none;
     border-radius: 2px;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
     cursor: pointer;
     display: inline-block;
@@ -585,45 +588,63 @@ h4, h5, h6 {
 
 .mui-btn:hover, .mui-btn:focus, .mui-btn:active {
     background-color: white;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
 }
 
 .mui-btn[disabled]:hover, .mui-btn[disabled]:focus, .mui-btn[disabled]:active {
     background-color: #FFF;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
 }
 
 .mui-btn.mui-btn--flat {
     background-color: transparent;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
 }
 
 .mui-btn.mui-btn--flat:hover, .mui-btn.mui-btn--flat:focus, .mui-btn.mui-btn--flat:active {
     background-color: #f2f2f2;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
 }
 
 .mui-btn.mui-btn--flat[disabled]:hover, .mui-btn.mui-btn--flat[disabled]:focus, .mui-btn.mui-btn--flat[disabled]:active {
     background-color: transparent;
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
 }
 
 .mui-btn:hover, .mui-btn:focus, .mui-btn:active {
+    color: #000000;
     color: rgba(0, 0, 0, 0.87);
     outline: 0;
     text-decoration: none;
 }
 
-.mui-btn:hover, .mui-btn:focus { box-shadow: 0 0px 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2); }
-
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    .mui-btn:hover, .mui-btn:focus { box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.12), -1px 0px 2px rgba(0, 0, 0, 0.12), 0 0px 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2); }
+.mui-btn:hover, .mui-btn:focus {
+    box-shadow: 0 0 2px #000000, 0 2px 2px #000000;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
-.mui-btn:active { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .mui-btn:hover, .mui-btn:focus {
+        box-shadow: 0 -1px 2px #000000, -1px 0 2px #000000, 0 0 2px #000000, 0 2px 2px #000000;
+        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.12), -1px 0 2px rgba(0, 0, 0, 0.12), 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.mui-btn:active {
+    box-shadow: 0 10px 20px #000000, 0 6px 6px #000000;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    .mui-btn:active { box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.12), -1px 0px 2px rgba(0, 0, 0, 0.12), 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+    .mui-btn:active {
+        box-shadow: 0 -1px 2px #000000, -1px 0 2px #000000, 0 10px 20px #000000, 0 6px 6px #000000;
+        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.12), -1px 0 2px rgba(0, 0, 0, 0.12), 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
 }
 
 .mui-btn:disabled, .mui-btn.mui--is-disabled {
@@ -642,10 +663,16 @@ h4, h5, h6 {
     box-shadow: none;
 }
 
-.mui-btn--raised, .mui-btn--fab { box-shadow: 0 0px 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2); }
+.mui-btn--raised, .mui-btn--fab {
+    box-shadow: 0 0 2px #000000, 0 2px 2px #000000;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2);
+}
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    .mui-btn--raised, .mui-btn--fab { box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.12), -1px 0px 2px rgba(0, 0, 0, 0.12), 0 0px 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2); }
+    .mui-btn--raised, .mui-btn--fab {
+        box-shadow: 0 -1px 2px #000000, -1px 0 2px #000000, 0 0px 2px #000000, 0 2px 2px #000000;
+        box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.12), -1px 0 2px rgba(0, 0, 0, 0.12), 0 0px 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2);
+    }
 }
 
 .mui-btn--raised:active, .mui-btn--fab:active { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }

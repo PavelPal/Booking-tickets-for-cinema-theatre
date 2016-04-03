@@ -10,5 +10,6 @@ namespace CinemaCounter.Models.Admin
         public int UsersCount { get; set; }
         public int ThicketsCount { get; set; }
         public List<Task> Tasks { get; set; }
+        public List<Message> Messages { get; set; }
     }
 }

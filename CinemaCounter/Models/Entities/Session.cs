@@ -19,9 +19,7 @@ namespace CinemaCounter.Models.Entities
         [Display(Name = "Дата и время сеанса")]
         public DateTime Date { get; set; }
 
-        public int SceneId { get; set; }
         public Scene Scene { get; set; }
-        public int CinemaId { get; set; }
         public Cinema Cinema { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
     }

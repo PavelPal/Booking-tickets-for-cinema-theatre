@@ -12,6 +12,8 @@ namespace CinemaCounter.Models.Entities
         {
             Actors = new List<Actor>();
             Genres = new List<Genre>();
+            Cinemas = new List<Cinema>();
+            Sessions = new List<Session>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -33,17 +35,18 @@ namespace CinemaCounter.Models.Entities
 
         [Required(ErrorMessage = "Не корректно введена продолжительность")]
         [Display(Name = "Продолжительность")]
-        public double Duration { get; set; }
+        public int Duration { get; set; }
 
         [DefaultValue(0)]
         [Display(Name = "Отценка")]
         public double Mark { get; set; }
 
+        public string ImagePath { get; set; }
         public ICollection<Actor> Actors { get; set; }
         public ICollection<Genre> Genres { get; set; }
-        public int CompanyId { get; set; }
+        public ICollection<Cinema> Cinemas { get; set; }
+        public ICollection<Session> Sessions { get; set; }
         public Company Company { get; set; }
-        public int DirectorId { get; set; }
         public Director Director { get; set; }
     }
 }

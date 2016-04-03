@@ -1,22 +1,55 @@
-﻿@{
+﻿@model CinemaCounter.Models.Entities.Message
+@{
     ViewBag.Title = "Контакты";
 }
-
-<div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
-<div class="mui-panel">
-    <div class="mui--text-headline">Адрес</div>
-    <div class="panel-block">
-        <div class="mui--text-body2">
-            Ул. Казинца 91<br/>
-            Минск, Беларусь<br/>
-            Телефон: +375 29 556 74 49<br/>
-            Поддержка: <a href="mailto:paulpal1995@gmail.com">paulpal1995@gmail.com</a>
+<div class="mui-row">
+    <div class="mui-col-md-7">
+        <div class="mui-panel">
+            <div class="mui--text-headline">Адрес</div>
+            <div class="panel-block">
+                <div class="mui--text-body2">
+                    Ул. Казинца 91<br/>
+                    Минск, Беларусь<br/>
+                    Телефон: +375 29 556 74 49<br/>
+                    Поддержка: <a href="mailto:paulpal1995@gmail.com">paulpal1995@gmail.com</a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="mui--text-headline">Социальные сети</div>
-    <div class="panel-block">
-        <a href="https://vk.com/paul_pal" class="mui-btn mui-btn--flat mui-btn--primary" target="_blank">Вконтакте</a>
-        <a href="https://www.facebook.com/pavel.romanov.904" class="mui-btn mui-btn--flat mui-btn--primary" target="_blank">Facebook</a>
-        <a href="https://twitter.com/dear_pavelp" class="mui-btn mui-btn--flat mui-btn--primary" target="_blank">Twitter</a>
+    <div class="mui-col-md-5">
+        <div class="mui-panel">
+            <div class="mui--text-headline">Социальные сети</div>
+            <div class="panel-block">
+                <a href="https://vk.com/paul_pal" class="mui-btn mui-btn--primary btn-with-margin-auto-with" target="_blank">Вконтакте</a>
+                <a href="https://www.facebook.com/pavel.romanov.904" class="mui-btn mui-btn--primary btn-with-margin-auto-with" target="_blank">Facebook</a>
+                <a href="https://twitter.com/dear_pavelp" class="mui-btn mui-btn--primary btn-with-margin-auto-with" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-md-12">
+        <div class="mui-panel">
+            <div class="mui--text-headline">Связаться с администратором</div>
+            <div class="panel-block">
+                @using (Html.BeginForm("Contact", "Home", new {ViewBag.ReturnUrl}, FormMethod.Post, new {role = "form"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <legend>Заполните все поля</legend>
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    <div class="mui-textfield">
+                        @Html.TextBoxFor(m => m.Title, new {required = "", placeholder = Html.DisplayNameFor(m => m.Title)})
+                        @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="mui-textfield">
+                        @Html.TextBoxFor(m => m.Sender, new {required = "", placeholder = Html.DisplayNameFor(m => m.Sender)})
+                        @Html.ValidationMessageFor(model => model.Sender, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="mui-textfield">
+                        @Html.TextAreaFor(m => m.Body, new {required = "", placeholder = Html.DisplayNameFor(m => m.Body)})
+                        @Html.ValidationMessageFor(model => model.Body, "", new {@class = "text-danger"})
+                    </div>
+                    <button type="submit" class="mui-btn mui-btn--primary">Отправить</button>
+                }
+            </div>
+        </div>
     </div>
 </div>

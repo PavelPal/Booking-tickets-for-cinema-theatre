@@ -1,9 +1,6 @@
 /*Global Styles*/
 
-body {
-    color: #5f6468;
-    padding-top: 50px;
-}
+body { padding-top: 50px; }
 
 p { color: #777; }
 
@@ -259,6 +256,13 @@ a.bg-danger:hover { background-color: #f9243f; }
 
 /*Panels*/
 
+.date-panel {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 248px;
+}
+
 .panel { border: 0; }
 
 .panel-heading {
@@ -269,6 +273,8 @@ a.bg-danger:hover { background-color: #f9243f; }
     line-height: 45px;
 }
 
+.panel-heading { padding-left: 10px; }
+
 .panel-default { padding: 0; }
 
 .panel-default .panel-heading {
@@ -277,10 +283,7 @@ a.bg-danger:hover { background-color: #f9243f; }
     color: #5f6468;
 }
 
-.panel-footer {
-    background: #fff;
-    border-top: 1px solid #eee;
-}
+.panel-footer { background: #fff; }
 
 .panel-widget {
     padding: 0;
@@ -341,12 +344,6 @@ a.bg-danger:hover { background-color: #f9243f; }
 .panel-red .text-muted {
     color: #ffffff;
     color: rgba(255, 255, 255, .5);
-}
-
-.dark-overlay {
-    background: #000000;
-    background: rgba(0, 0, 0, .05);
-    text-align: center;
 }
 
 .widget-left {
@@ -679,7 +676,7 @@ h1.page-header {
     background: rgba(0, 0, 0, 0.25);
 }
 
-.panel-heading i { margin-right: 10px; }
+.panel-heading i { margin-left: 10px; }
 
 .todo-list-item i {
     color: #9fadbb;
@@ -745,7 +742,6 @@ input[type=checkbox] { margin: 0 !important; }
 
 .chat ul {
     list-style: none;
-    margin: -15px;
     padding: 15px;
 }
 
@@ -755,18 +751,22 @@ input[type=checkbox] { margin: 0 !important; }
     padding: 15px 5px;
 }
 
-.chat ul li.left .chat-body { margin-left: 100px; }
-
-.chat ul li.right .chat-body { margin-right: 100px; }
-
 .chat ul li .chat-body p { margin: 0; }
 
 .chat ul .glyphicon { margin-right: 5px; }
 
 .chat .panel-body {
     height: 300px;
-    overflow-y: scroll;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+
+.chat .panel-body::-webkit-scrollbar { width: 5px; }
+
+.chat .panel-body::-webkit-scrollbar-thumb { background: #2196F3; }
+
+.panel-body .todo-list { margin: 0 5px; }
 
 .panel-body .canvas-wrapper { margin: 10px; }
 
@@ -823,12 +823,6 @@ input[type=checkbox] { margin: 0 !important; }
     text-align: center;
 }
 
-.icon-grid svg {
-    display: block;
-    margin: 0 auto;
-    width: 35%;
-}
-
 .icon-grid h4 { display: none; }
 
 .icon-grid pre {
@@ -846,8 +840,6 @@ input[type=checkbox] { margin: 0 !important; }
     color: rgba(0, 0, 0, 0.75);
 }
 
-.user-menu .dropdown.pull-right ul li svg { margin-left: 10px; }
-
 .panel-body .todo-list { height: 275px; }
 
 .panel-body .todo-list {
@@ -856,17 +848,9 @@ input[type=checkbox] { margin: 0 !important; }
     overflow-y: auto;
 }
 
-.panel-body .todo-list::-webkit-scrollbar { width: 8px; }
+.panel-body .todo-list::-webkit-scrollbar { width: 5px; }
 
-.panel-body .todo-list::-webkit-scrollbar-track {
-    background: #000000;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.panel-body .todo-list::-webkit-scrollbar-thumb {
-    background: #000000;
-    background: rgba(0, 0, 0, 0.2);
-}
+.panel-body .todo-list::-webkit-scrollbar-thumb { background: #2196F3; }
 
 .todo-list-info {
     padding: 10px 15px;
@@ -1019,7 +1003,7 @@ input[type=checkbox] { margin: 0 !important; }
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 8px 10px;
 }
 
 .add-form .mui-textfield {

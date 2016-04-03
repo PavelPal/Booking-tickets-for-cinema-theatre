@@ -1,4 +1,4 @@
-﻿function activateModal() {
+function activateModal() {
     var modalEl = document.createElement("div");
     modalEl.style.width = "400px";
     modalEl.style.height = "300px";
@@ -69,7 +69,9 @@ function deleteTask(removeFromObject, taskId) {
             if (removeFromObject.children().length === 0) {
                 $("<p class=\"todo-list-info\">" +
                     "<i class=\"fa fa-info-circle color-blue\"></i> " +
-                    "Нет заданий для удаления</p>").show("slow").appendTo(removeFromObject);
+                    "Нет заданий для удаления</p>")
+                    .show("slow")
+                    .appendTo(removeFromObject);
             }
         }
     });
@@ -124,6 +126,57 @@ function toggleState(changedObject, taskId) {
     });
 }
 
+function toggleState(changedObject, taskId) {
+    var id = taskId.substring(15);
+    $.ajax({
+        url: "/Admin/ToggleState",
+        method: "POST",
+        data: {
+            'id': id
+        },
+        dataType: "json",
+        beforeSend: function() {
+            $("#fountainG").css({
+                '-ms-opacity': "1",
+                'opacity': "1"
+            });
+        },
+        complete: function() {
+            $("#fountainG").css({
+                '-ms-opacity': "0",
+                'opacity': "0"
+            });
+        }
+    });
+}
+
+function сhangeTaskBody(taskId, body) {
+    var id = taskId.substring(15);
+    $.ajax({
+        url: "/Admin/ChangeTaskBody",
+        method: "POST",
+        data: {
+            'id': id,
+            'body': body
+        },
+        dataType: "json",
+        beforeSend: function() {
+            $("#fountainG").css({
+                '-ms-opacity': "1",
+                'opacity': "1"
+            });
+        },
+        complete: function() {
+            $("#fountainG").css({
+                '-ms-opacity': "0",
+                'opacity': "0"
+            });
+            $(".todo-list-item#" + taskId + " div label").text(body);
+            mui.overlay("off");
+        }
+    });
+}
+
 $(document).ready(function() {
     $(".add-form").on("click", "#add-to-remove", function() {
         var goal = "remove",
@@ -163,5 +216,17 @@ $(document).ready(function() {
         var taskId = $(this).parent().attr("id");
         var changedObject = $(this).children();
         toggleState(changedObject, taskId);
+    });
+
+    $("html").delegate(".edit", "click", function() {
+        var taskId = $(this).parent().parent().attr("id");
+        var value = $(this).parent().parent().children(".checkbox").children("label");
+        activateModal(taskId, $(value[0]).contents().text());
+    });
+
+    $("html").delegate("#edit-btn", "click", function() {
+        var taskId = $(this).parent().children().children("input").attr("id");
+        var body = $(this).parent().children().children("input").val();
+        сhangeTaskBody(taskId, body);
     });
 });

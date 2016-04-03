@@ -46,6 +46,16 @@ namespace CinemaCounter.Models.DAO.Scene
             return scene;
         }
 
+        public List<Entities.Scene> Load()
+        {
+            List<Entities.Scene> scenes;
+            using (var context = new ApplicationDbContext())
+            {
+                scenes = context.Scenes.ToList();
+            }
+            return scenes;
+        }
+
         public List<Entities.Scene> Load(int skip, int take)
         {
             List<Entities.Scene> scenes;

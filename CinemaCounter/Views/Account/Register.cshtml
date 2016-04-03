@@ -3,38 +3,30 @@
     ViewBag.Title = "Регистрация";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-{
-    @Html.AntiForgeryToken()
-    <h4>Создайте новую учетную запись.</h4>
-    <hr/>
-    @Html.ValidationSummary("", new {@class = "text-danger"})
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+<div class="mui-row">
+    <div class="mui-col-md-8 mui-col-md-offset-2">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+            @using (Html.BeginForm("Register", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+                <legend>Создайте новую учетную запись</legend>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="mui-textfield">
+                    @Html.TextBoxFor(m => m.Email, new {required = "", placeholder = Html.DisplayNameFor(m => m.Email)})
+                </div>
+                <div class="mui-textfield">
+                    @Html.PasswordFor(m => m.Password, new {required = "", placeholder = Html.DisplayNameFor(m => m.Password)})
+                </div>
+                <div class="mui-textfield">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new {required = "", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword)})
+                </div>
+                <button type="submit" class="mui-btn mui-btn--primary">Регистрация</button>
+                @Html.ActionLink("Войти, если у Вам уже есть аккаунт", "Login", null, new {@class = "account-action"})
+            }
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Регистрация"/>
-        </div>
-    </div>
-}
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

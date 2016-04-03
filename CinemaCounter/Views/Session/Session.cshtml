@@ -1,8 +1,45 @@
-﻿
+﻿@model CinemaCounter.Models.Entities.Session
+
 @{
-    ViewBag.Title = "Session";
+    ViewBag.Title = "Сеанс";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Session</h2>
-
+<div class="mui-row">
+    <div class="mui-col-md-5">
+        <div class="mui--text-display1 mui--text-dark-secondary page-title">@ViewBag.Title</div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Сеанс @Model.Scene.Name в @Model.Cinema.Name</div>
+            <div class="panel-block">
+                <img src="@Model.Scene.ImagePath" alt="" />
+                <div class="mui--text-body2">
+                    <p>Дата и время: @Model.Date</p>
+                    <p>Адрес: @Model.Cinema.Town, @Model.Cinema.Street @Model.Cinema.Building</p>
+                    @if (Model.Cinema.Station != null)
+                    {
+                        <p>Станция метро: @Model.Cinema.Station</p>
+                    }
+                    <p>Номер телефона: @Model.Cinema.Phone</p>
+                    @Html.ActionLink("Связаться с администратором для бронирования билета", "Book", "Session", new {id = Model.Id}, new {})
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mui-col-md-7">
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+        <div class="mui-panel">
+            <div class="mui--text-headline">Место для рекламы</div>
+        </div>
+    </div>
+</div>
